@@ -2,15 +2,17 @@
   <div id="app">
     <Title />
     <TerrysSchedule />
-    <Footer msg="tada" />
+    <Footer />
   </div>
 </template>
 
 <script>
-// import Vue from 'vue';
+// ----------------------------------------
 
-// import VueI18n from 'vue-i18n';
-// import locales from '@/assets/json/locales.json';
+import Vue from "vue";
+
+import VueI18n from "vue-i18n";
+import locales from "@/assets/json/locales.json";
 
 // import Cfg from '@/components/Cfg.js'
 import Title from "@/components/Title.vue";
@@ -19,20 +21,24 @@ import Footer from "@/components/Footer.vue";
 
 // ----------------------------------------
 // Localization
-// Vue.use(VueI18n);
-// const messages = {};
-// Object.keys(locales).forEach((locale) => {
-//   messages[locale] = require(`@/lang/${locale}.json`);
-// });
+Vue.use(VueI18n);
 
-// const i18n = new VueI18n({
-//   locale: Cfg.getters.locale,
-//   fallbackLocale: 'en',
-//   messages,
-// });
+// From the language list in the locales.json file this will load and stuff the necessary parts in the array.
+const messages = {};
+Object.keys(locales).forEach((locale) => {
+  messages[locale] = require(`@/lang/${locale}.json`);
+});
+
+// Create the i18n object
+const i18n = new VueI18n({
+  locale: "fr ",
+  fallbackLocale: "en",
+  messages,
+});
 
 // ----------------------------------------
 // There we go!
+
 export default {
   name: "App",
   components: {
@@ -40,7 +46,12 @@ export default {
     TerrysSchedule,
     Footer,
   },
-  // data:  i18n
+  data() {
+    return {
+      // locale: "fr",
+    };
+  },
+  i18n, // we don't forget to feed the i18n stuff
 };
 </script>
 
@@ -65,7 +76,6 @@ export default {
   border-radius: 10px;
   box-shadow: 0px 10px 5px #00000080;
   font-weight: bold;
-
 }
 
 .terrrySchedule {
@@ -75,8 +85,10 @@ export default {
   min-height: 256px;
 
   padding: 10px;
-  background-color:ghostwhite;
+  background-color: ghostwhite;
   color: black;
+  text-align: left;
+
   border-radius: 10px;
   box-shadow: 0px 10px 5px #00000080;
 }
@@ -98,6 +110,12 @@ export default {
   font-weight: bold;
   text-align: right;
   box-shadow: 0px 10px 5px #00000080;
+}
 
+a,
+a:visited {
+  color: #004080;
+  font-weight: bold;
+  text-decoration: underline;
 }
 </style>

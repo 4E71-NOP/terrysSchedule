@@ -1,5 +1,7 @@
 {
     "title":"Terry's Schedule",
-    "invite" : "Welcome to this humble website. The goal is to help players to organize for Eidolon hunt missions.",
-    "footer": "All logos and trademarks are property of DE."
+    "TSheader":"Lets organize!",
+    "invite1" : "Welcome to this humble website. The goal is to help ",
+    "invite2" : " players organize for Eidolon hunt missions.",
+    "footer": "All WarFrame logos and trademarks are property of DE."
 }

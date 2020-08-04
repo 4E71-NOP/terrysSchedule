@@ -1,5 +1,7 @@
 {
     "title":"L'agenda de Terry",
-    "invite" : "Bienvenue sur ce modeste site. le but est de permettre aux joueurs de s'organiser pour les missions de chasse Eidolon",
-    "footer": "Tous les logos et marques déposées sont la propriété de DE."
+    "TSheader":"Organisons nous!",
+    "invite1" : "Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
+    "invite2" : " de s'organiser pour les missions de chasse Eidolon.",
+    "footer": "Tous les logos et marques WarFrame sont la propriété de DE."
 }

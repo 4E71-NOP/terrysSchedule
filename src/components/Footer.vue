@@ -1,17 +1,13 @@
 <template>
-  <div id="footer" class="footer">{{msg}}</div>
+  <div id="footer" class="footer">{{$t('footer')}}</div>
 </template>
-
-
 
 <script>
 export default {
   name: "Footer",
   data() {
     return {
-      msg: "Footer text is in the footer",
-      header: "",
-      invite: "",
+      dbg: "My name is Footer.vue",
     };
   },
 };

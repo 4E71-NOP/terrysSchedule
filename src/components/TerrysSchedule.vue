@@ -1,19 +1,18 @@
 <template>
   <div id="terrrySchedule" class="terrrySchedule">
-    <!-- <HubPanelWrap :title="headertext"> -->
-    <h1>{{header}}</h1>
-    <p>{{invite}}</p>
-    <!-- </HubPanelWrap> -->
+    <h3>{{ $t('TSheader') }}</h3>
+    <p>{{ $t('invite1') }} <a href='http://www.warframe.com' target='_blank'>WarFrame</a> {{$t('invite2')}}</p>
   </div>
 </template>
 
 <script>
+// import for fetching the data from DE
+
 export default {
   name: "TerrysSchedule",
   data() {
     return {
-      header: "Ceci est l'entête du cadre",
-      invite: "Ce texte d'invite sera a remplacer dynamiquement par une localisation (i18n) qui n'est pas implémentée pour le moment. En bref : Tagol!",
+      dbg: "My name is TerrysSchedule.vue",
     };
   },
 };
