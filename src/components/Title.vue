@@ -1,15 +1,17 @@
 <template>
-  <div id="footer" class="footer">{{msg}}</div>
+  <div id="title" class="title">
+    <h1>{{msg}}</h1>
+  </div>
 </template>
 
 
 
 <script>
 export default {
-  name: "Footer",
+  name: "Title",
   data() {
     return {
-      msg: "Footer text is in the footer",
+      msg: "Title in Engeulish",
       header: "",
       invite: "",
     };
