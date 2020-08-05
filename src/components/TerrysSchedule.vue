@@ -9,28 +9,28 @@
           v-bind:class="{tblSelectionPlatformTdActive: tdListActive.pc}"
           @click="clickOnTd('pc')"
         >
-		<font-awesome-icon icon="faDesktop"></font-awesome-icon>PC
+          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fab', 'windows']"></font-awesome-icon>PC
         </td>
         <td
           class="tblSelectionPlatformTd"
           v-bind:class="{tblSelectionPlatformTdActive: tdListActive.ps4}"
           @click="clickOnTd('ps4')"
         >
-          <font-awesome-icon icon="playstation"></font-awesome-icon>PS4
+          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fab', 'playstation']"></font-awesome-icon>PS4
         </td>
         <td
           class="tblSelectionPlatformTd"
           v-bind:class="{tblSelectionPlatformTdActive: tdListActive.xb1}"
           @click="clickOnTd('xb1')"
         >
-          <font-awesome-icon icon="faBox"></font-awesome-icon>Xbox One
+          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fab', 'xbox']"></font-awesome-icon>Xbox One
         </td>
         <td
           class="tblSelectionPlatformTd"
           v-bind:class="{tblSelectionPlatformTdActive: tdListActive.switch}"
           @click="clickOnTd('switch')"
         >
-          <font-awesome-icon icon="faMagic"></font-awesome-icon>Switch
+          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fas', 'magic']"></font-awesome-icon>Switch
         </td>
       </tr>
     </table>

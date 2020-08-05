@@ -4,10 +4,10 @@ import router from "@/router.js"; // 'router' as in 'must be exactly 'router' an
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faFontAwesome } from '@fortawesome/free-brands-svg-icons'
-import { faHome, faInfoCircle, faDesktop, faMagic } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faInfoCircle, faMagic } from '@fortawesome/free-solid-svg-icons'
+import { faWindows, faPlaystation, faXbox } from '@fortawesome/free-brands-svg-icons'
 
-library.add([faHome, faInfoCircle, faDesktop, faMagic, faFontAwesome]);
+library.add([faHome, faInfoCircle, faMagic, faWindows, faPlaystation, faXbox]);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false

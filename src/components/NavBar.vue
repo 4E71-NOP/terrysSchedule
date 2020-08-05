@@ -1,9 +1,12 @@
 <template>
   <div id="navBar" class="navBar">
-    <span class="navBarMenuItem" v-for="item in navBarItems" :key="item.id">
-      <font-awesome-icon :icon="item.icon"/>
-      <router-link :to="{name: item.routeName}">{{ $t(item.i18n) }}</router-link>
-    </span>
+    <div class="navBarMenuItem" v-for="item in navBarItems" :key="item.id">
+      <router-link class="navBarRouterLink" :to="{name: item.routeName}">
+        <font-awesome-icon class="fa-2x" :icon="[item.iconGroup, item.iconName]" />
+        &nbsp;
+        {{ $t(item.i18n) }}
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -18,13 +21,15 @@ export default {
           id: 0,
           routeName: "home",
           i18n: "navBar-home",
-          icon: "faHome",
+          iconGroup: "fas",
+          iconName: "home",
         },
         {
           id: 1,
           routeName: "information",
           i18n: "navBar-information",
-          icon: "faInfoCircle",
+          iconGroup: "fas",
+          iconName: "info-circle",
         },
       ],
     };
