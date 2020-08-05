@@ -1,5 +1,10 @@
 <template>
-  <div id="footer" class="footer">{{$t('footer')}}</div>
+  <transition name="fade">
+    <div id="footer" class="footer">
+      {{$t('footer-author')}} | 
+      {{$t('footer-de')}}
+    </div>
+  </transition>
 </template>
 
 <script>

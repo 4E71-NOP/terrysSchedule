@@ -3,5 +3,11 @@
     "TSheader":"Lets organize!",
     "invite1" : "Welcome to this humble website. The goal is to help ",
     "invite2" : " players organize for Eidolon hunt missions.",
-    "footer": "All WarFrame logos and trademarks are property of DE."
+    "footer-author" : "TexMex-- did this",
+    "footer-de": "All WarFrame logos and trademarks are property of DE.",
+    "navBar-home": "Home",
+    "navBar-information": "Information",
+    "information-t01":"Welcome to this humble website. The goal is to help ",
+    "information-t02":" players organize for Eidolon hunt missions.",
+    "buttonGoBack":"Go back"
 }

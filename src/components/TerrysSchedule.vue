@@ -1,7 +1,6 @@
 <template>
-  <div id="terrrySchedule" class="terrrySchedule">
+  <div id="terrrySchedule" class="RouterViewBlock">
     <h3>{{ $t('TSheader') }}</h3>
-    <p>{{ $t('invite1') }} <a href='http://www.warframe.com' target='_blank'>WarFrame</a> {{$t('invite2')}}</p>
   </div>
 </template>
 
