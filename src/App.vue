@@ -43,7 +43,7 @@ export default {
 
   components: {
     Title,
-	NavBar,
+    NavBar,
     Footer,
   },
 

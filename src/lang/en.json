@@ -1,6 +1,6 @@
 {
     "title":"Terry's Schedule",
-    "TSheader":"Lets organize!",
+    "buttonGoBack":"Go back",
     "invite1" : "Welcome to this humble website. The goal is to help ",
     "invite2" : " players organize for Eidolon hunt missions.",
     "footer-author" : "TexMex-- did this",
@@ -9,5 +9,8 @@
     "navBar-information": "Information",
     "information-t01":"Welcome to this humble website. The goal is to help ",
     "information-t02":" players organize for Eidolon hunt missions.",
-    "buttonGoBack":"Go back"
+    
+    "TSheader":"Lets organize!",
+    "TSTblPlatform":"Plateform"
+
 }

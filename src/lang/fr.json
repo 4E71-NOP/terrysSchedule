@@ -1,6 +1,6 @@
 {
     "title":"L'agenda de Terry",
-    "TSheader":"Organisons nous!",
+    "buttonGoBack":"Revenir en arrière",
     "invite1" : "Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
     "invite2" : " de s'organiser pour les missions de chasse Eidolon.",
     "footer-author" : "TexMex-- l'a fait",
@@ -9,5 +9,7 @@
     "navBar-information": "Information",
     "information-t01":"Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
     "information-t02":" de s'organiser pour les missions de chasse Eidolon.",
-    "buttonGoBack":"Revenir en arrière"
+    
+    "TSheader":"Organisons nous!",
+    "TSTblPlatform":"Plateforme"
 }
