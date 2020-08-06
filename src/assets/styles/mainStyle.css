@@ -24,7 +24,7 @@
 	min-height: 32px;
 	display: block;
 	margin: 0px 15px 0px 15px;
-	padding: 5px;
+	padding: 5px 10px 10px 10px;
 	background-color: rgb(0, 90, 90);
 	color: white;
 	text-align: left;
@@ -55,6 +55,21 @@
 	text-decoration: underline;
 }
 
+
+.navBarLangSelectTbl {
+	margin-right:0px; 
+	margin-left:auto;
+	width: 10%;
+}
+.navBarLangSelectTblTd {
+	border-radius: 15px;
+	text-align: center;
+}
+.navBarLangSelectTblTd:hover {
+	background-color: #ffffff40;
+
+}
+
 .RouterViewBlock {
 	width: 90%;
 	display: block;
@@ -66,6 +81,41 @@
 	text-align: left;
 	border-radius: 0px 0px 10px 10px;
 	box-shadow: 0px 10px 5px #00000080;
+}
+
+.tblSelectionPlatform {
+	width: 80%;
+	margin: auto;
+}
+
+.tblSelectionPlatform > caption{
+	font-size: large;
+	font-weight: bold;
+	text-align: left;
+}
+
+.tblSelectionPlatformTd {
+	color: black;
+	background-color: #80808080;
+	padding: 10px;
+	width: 20%;
+	border-radius: 25px;
+	text-align: center;
+	vertical-align: top;
+
+}
+.tblSelectionPlatformTdActive {
+	color: white;
+	background-color: #004080;
+	font-weight: bold;
+}
+.tblSelectionPlatformTd:hover {
+	color: #ffffff;
+	background-color: #004080c0;
+}
+
+.iconPlatform {
+	margin-right: 10px;
 }
 
 .footer {
@@ -85,35 +135,9 @@
 	box-shadow: 0px 10px 5px #00000080;
 }
 
-.tblSelectionPlatform {
-	width: 80%;
-	margin: auto;
-	border: 5px;
-}
 
-.tblSelectionPlatformTd {
-	color: black;
-	background-color: #80808080;
-	padding: 10px;
-	width: 20%;
-	border-radius: 25px;
-	text-align: center;
-	vertical-align: top;
-
-}
-.tblSelectionPlatformTdActive {
-	color: white;
-	background-color: #004080;
-	font-weight: bold;
-}
-.iconPlatform {
-	margin-right: 10px;
-}
-
-a, a:visited {
-	color: #004080;
-	font-weight: bold;
-	text-decoration: underline;
+body {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 h3, p {
@@ -121,6 +145,8 @@ h3, p {
 	margin: 0px;
 }
 
-body {
-	font-family: Arial, Helvetica, sans-serif;
+a, a:visited {
+	color: #004080;
+	font-weight: bold;
+	text-decoration: underline;
 }

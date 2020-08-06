@@ -3,13 +3,16 @@
     "buttonGoBack":"Revenir en arrière",
     "invite1" : "Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
     "invite2" : " de s'organiser pour les missions de chasse Eidolon.",
-    "footer-author" : "TexMex-- l'a fait",
-    "footer-de": "Tous les logos et marques WarFrame sont la propriété de DE.",
+
     "navBar-home": "Accueil",
     "navBar-information": "Information",
+
     "information-t01":"Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
     "information-t02":" de s'organiser pour les missions de chasse Eidolon.",
     
     "TSheader":"Organisons nous!",
-    "TSTblPlatform":"Plateforme"
+    "TSTblPlatform":"Plateforme",
+
+    "footer-author" : "TexMex-- l'a fait",
+    "footer-de": "Tous les logos et marques WarFrame sont la propriété de DE."
 }

@@ -1,5 +1,14 @@
 <template>
   <div id="navBar" class="navBar">
+    <div>
+      <table class="navBarLangSelectTbl">
+        <tr>
+          <td class="navBarLangSelectTblTd" @click="setI18nLang('fr')">FR</td>
+          <td class="navBarLangSelectTblTd" @click="setI18nLang('en')">EN</td>
+        </tr>
+      </table>
+    </div>
+
     <div class="navBarMenuItem" v-for="item in navBarItems" :key="item.id">
       <router-link class="navBarRouterLink" :to="{name: item.routeName}">
         <font-awesome-icon class="fa-2x" :icon="[item.iconGroup, item.iconName]" />
@@ -33,6 +42,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    setI18nLang(lang) {
+      this.$i18n.locale = lang;
+    },
   },
 };
 </script>
