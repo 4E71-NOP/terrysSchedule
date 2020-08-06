@@ -39,20 +39,38 @@
     </table>
     <br />
     <br />
-    <span>Choisi : {{ SelectedPlatform }}</span>
-    <br />
-    <span>Td : {{ clickOnTdVal }}</span>
+    <div v-if="updatedFetch===true">
+      <span>Choisi : {{ SelectedPlatform }}</span>
+      <br />from WarFrame API :
+      <br />
+      <span>timestamp = {{ WfData[SelectedPlatform].data.timestamp }}</span>
+      <br />
+      <span>localTimezone = {{ localTimezone }} / {{ new Date(WfData.pc.data.timestamp) }}</span>
+      <br />
+      <span>isDay = {{ WfData[SelectedPlatform].data.cetusCycle.isDay }}</span>
+      <br />
+      <span>activation = {{ WfData[SelectedPlatform].data.cetusCycle.activation }}</span>
+      <br />
+      <span>expiry = {{ WfData[SelectedPlatform].data.cetusCycle.expiry }}</span>
+      <br />
+      <span>shortString = {{ WfData[SelectedPlatform].data.cetusCycle.shortString }}</span>
+      <br />
+      <span>timeLeft = {{ WfData[SelectedPlatform].data.cetusCycle.timeLeft }}</span>
+
+    </div>
   </div>
 </template>
 
 <script>
+// ----------------------------------------
+
 export default {
   name: "TerrysSchedule",
   data() {
     return {
       SelectedPlatform: "pc",
-      clickOnTdVal: false,
-      lastUpdate: 0,
+      updatedFetch: false,
+      localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       tdListActive: {
         pc: true,
         ps4: false,
@@ -65,6 +83,15 @@ export default {
         ps4: { lastUpdate: 0, data: {} },
         xb1: { lastUpdate: 0, data: {} },
         switch: { lastUpdate: 0, data: {} },
+      },
+      appointments: [],
+      calendar_settings: {
+        style: "material_design", // ['flat_design', 'material_design']
+        view_type: "Week", // ['Month', 'Day']
+        split_value: 20, // Value % 60 === 0
+        cell_height: 20, // !isNaN(Value)
+        scrollToNow: true, // Boolean
+        current_day: new Date(), // Valid date
       },
     };
   },
@@ -80,16 +107,22 @@ export default {
       if (dateVal - this.WfData[val].lastUpdate > 3 * 1000) {
         // update the counters. We don't want to spam DE
         // console.log("Gap="+(dateVal - this.WfData[val].lastUpdate)/1000+"s -> Update!");
-
         // Fetching the data from DE
-		// https://api.warframestat.us/pc (ou platform : pc,ps4,xb1,switch)
-		console.log ("Trying : "+"https://api.warframestat.us/"+val);
-        fetch("https://api.warframestat.us/"+val, {"method": "GET"})
+        // https://api.warframestat.us/pc (ou platform : pc,ps4,xb1,switch)
+        console.log("Trying : " + "https://api.warframestat.us/" + val);
+        fetch("https://api.warframestat.us/" + val, {
+          method: "GET",
+          "Content-Type": "application/json",
+        })
           .then((res) => {
             if (res.ok) {
-			  this.WfData[val].data = res.body;
-			  this.WfData[val].lastUpdate = Date.now();
+              return res.json();
             }
+          })
+          .then((res) => {
+            this.WfData[val].data = res;
+            this.WfData[val].lastUpdate = Date.now();
+            this.updatedFetch = true;
           })
           .catch((err) => {
             console.log(err);
@@ -99,14 +132,4 @@ export default {
   },
 };
 
-/*
-fetch("https://jokes-database.p.rapidapi.com/", {
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-host": "jokes-database.p.rapidapi.com",
-        "x-rapidapi-key": this.apiKey
-    }
-})
-
-*/
 </script>

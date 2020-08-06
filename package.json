@@ -15,7 +15,7 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-fontawesome": "0.0.2",
-    "vue-router": "^3.4.0",
+    "vue-router": "^3.4.1",
     "webpack": "^4.44.1"
   },
   "devDependencies": {
