@@ -1,15 +1,15 @@
 <template>
   <div id="Information" class="RouterViewBlock">
     <p>
-      {{$t('information-t01')}}
+      {{$t('information.p01T01')}}
       <a href="http://www.warframe.com" target="_blank">WarFrame</a>
-      {{$t('information-t02')}}
+      {{$t('information.p01T02')}}
     </p>
     <br/>
     <br/>
     <br/>
     <p>
-      {{$t('information-t03')}}<br/>
+      {{$t('information.p02')}}<br/>
       <ul>
       <li v-for="el in externalLinks" :key="el.id">
         <a v-bind:href="el.url">{{el.face}}</a><br/>
@@ -35,6 +35,7 @@ export default {
           url: "https://www.thetimezoneconverter.com/",
           face: "thetimezoneconverter.com",
         },
+        { id: 3, url: "https://warframe.fandom.com/wiki/Plains_of_Eidolon", face: "Wiki - Plains of Eidolon"},
       ],
     };
   },

@@ -29,14 +29,14 @@ export default {
         {
           id: 0,
           routeName: "home",
-          i18n: "navBar-home",
+          i18n: "navBar.home",
           iconGroup: "fas",
           iconName: "home",
         },
         {
           id: 1,
           routeName: "information",
-          i18n: "navBar-information",
+          i18n: "navBar.information",
           iconGroup: "fas",
           iconName: "info-circle",
         },

@@ -1,19 +1,50 @@
 {
-    "title":"L'agenda de Terry",
-    "buttonGoBack":"Revenir en arrière",
-    "invite1" : "Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
-    "invite2" : " de s'organiser pour les missions de chasse Eidolon.",
-
-    "navBar-home": "Accueil",
-    "navBar-information": "Information",
-
-    "information-t01":"Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
-    "information-t02":" de s'organiser pour les missions de chasse Eidolon.",
-    "information-t03":"Ci-après une liste d'outils d'aide pour calculer l'heure locale.",
-    
-    "TSheader":"Organisons nous!",
-    "TSTblPlatform":"Plateforme",
-
-    "footer-author" : "TexMex-- l'a fait",
-    "footer-de": "Tous les logos et marques WarFrame sont la propriété de DE."
+	"title": "L'agenda de Terry",
+	"buttonGoBack": "Revenir en arrière",
+	"navBar": {
+		"home": "Accueil",
+		"information": "Information"
+	},
+	"information": {
+		"p01T01": "Bienvenue sur ce modeste site. le but est de permettre aux joueurs ",
+		"p01T02": " de s'organiser pour les missions de chasse Eidolon.",
+		"p02": "Ci-après une liste d'outils d'aide pour calculer l'heure locale."
+	},
+	"Ts": {
+		"p01": "Organisons nous!",
+		"tbl01Caption": "Plateforme",
+		"p02": "Les heures sont localisées pour votre position.",
+		"p03": "Votre Zone est : ",
+		"p04": "Fraicheur des données depuis l'API : ",
+		"eventsTblCaption": "Prochaines apparitions des Sentients des plaines d'Eidolon",
+		"eventsTblCol01": "Début",
+		"eventsTblCol02": "Fin"
+	},
+	"day": {
+		"0": "Dimanche",
+		"1": "Lundi",
+		"2": "Mardi",
+		"3": "Mercredi",
+		"4": "Jeudi",
+		"5": "Vendredi",
+		"6": "Samedi"
+	},
+	"month": {
+		"0": "Janvier",
+		"1": "Février",
+		"2": "Mars",
+		"3": "Avril",
+		"4": "Mai",
+		"5": "Juin",
+		"6": "Juillet",
+		"7": "Août",
+		"8": "Septembre",
+		"9": "Octobre",
+		"10": "Novembre",
+		"11": "Décembre"
+	},
+	"footer": {
+		"author": "TexMex-- l'a fait",
+		"de": "Tous les logos et marques WarFrame sont la propriété de DE."
+	}
 }

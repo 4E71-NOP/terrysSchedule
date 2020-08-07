@@ -1,8 +1,8 @@
 <template>
   <transition name="fade">
     <div id="footer" class="footer">
-      {{$t('footer-author')}} | 
-      {{$t('footer-de')}}
+      {{$t('footer.author')}} | 
+      {{$t('footer.de')}}
     </div>
   </transition>
 </template>
