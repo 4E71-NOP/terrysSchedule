@@ -5,20 +5,21 @@
 ## Fichiers et dépendances
 
 Créer **server.js** à la racine
-```sh
+```javascript
 const express = require('express');
 const app = express();
 
 // Serve all the files in '/dist' directory
 app.use(express.static('dist'));
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
 ```
 
 Créer **static.json**
-```sh
+```javascript
 {
     "root": "dist",
     "clean_urls": true,
@@ -30,7 +31,7 @@ Créer **static.json**
 
 **Heroku** a besoin d'une information pour installer sur son archi les bons élements.
 Dans **package.json**:
-```javaScript
+```javascript
 "dependencies": {
   [...]
       "express": "^4.17.1",
@@ -38,7 +39,7 @@ Dans **package.json**:
  },
 ```
 
-```javaScript
+```javascript
 "scripts": {
     [...]
     "postinstall": "npm run build",
