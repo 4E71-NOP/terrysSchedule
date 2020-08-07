@@ -126,7 +126,7 @@
 	margin: auto;
 	border-width: 5px;
 	border-style: solid;
-	border-color:#00000040;
+	border-color: #00000040;
 	border-spacing: 0px;
 	background-color: #00000010;
 	text-align: center;
@@ -138,6 +138,14 @@
 	text-align: left;
 	background-color: #00000010;
 	padding: 10px;
+}
+
+.tblEvents>thead {
+	background-color: #FFC00040;
+}
+
+.tblEvents>thead>tr>td {
+	border-bottom: 2px solid black;
 }
 
 .tblEvents>tbody>tr:hover {

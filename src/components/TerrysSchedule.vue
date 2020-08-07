@@ -48,19 +48,26 @@
 
       <table class="tblEvents">
         <caption>{{$t("Ts.eventsTblCaption") }}</caption>
+        <thead>
+          <tr>
+            <td colspan="3" >{{$t("Ts.eventsTblCol01")}}</td>
+            <td colspan="3" >{{$t("Ts.eventsTblCol02")}}</td>
+          </tr>
+
+        </thead>
         <tbody>
-        <tr
-          v-for="el in huntEidolonSchedule"
-          :key="el.id"
-          v-bind:class="{tblEventsTrShift: el.even}"
-        >
-          <td v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}">{{el.start.month}}</td>
-          <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.day}}</td>
-          <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-          <td v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}">{{el.end.month}}</td>
-          <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.day}}</td>
-          <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
-        </tr>
+          <tr
+            v-for="el in huntEidolonSchedule"
+            :key="el.id"
+            v-bind:class="{tblEventsTrShift: el.even}"
+          >
+            <td v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}">{{el.start.month}}</td>
+            <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.day}}</td>
+            <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
+            <td v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}">{{el.end.month}}</td>
+            <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.day}}</td>
+            <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+          </tr>
         </tbody>
       </table>
       <br />
