@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "@/router.js"; // 'router' as in 'must be exactly 'router' and nobody told you!!!
+// import store from "./store";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -10,8 +11,10 @@ import { faWindows, faPlaystation, faXbox } from '@fortawesome/free-brands-svg-i
 library.add([faHome, faInfoCircle, faMagic, faWindows, faPlaystation, faXbox]);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
 new Vue({
   router,
+  // store,
   render: h => h(App),
 }).$mount('#app')

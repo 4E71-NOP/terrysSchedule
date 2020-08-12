@@ -30,7 +30,7 @@ Object.keys(locales).forEach((locale) => {
 
 // Create the i18n object
 const i18n = new VueI18n({
-  locale: "fr",
+  locale: "en",
   fallbackLocale: "en",
   messages,
 });

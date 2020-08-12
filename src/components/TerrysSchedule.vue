@@ -50,10 +50,9 @@
         <caption>{{$t("Ts.eventsTblCaption") }}</caption>
         <thead>
           <tr>
-            <td colspan="3" >{{$t("Ts.eventsTblCol01")}}</td>
-            <td colspan="3" >{{$t("Ts.eventsTblCol02")}}</td>
+            <td colspan="3">{{$t("Ts.eventsTblCol01")}}</td>
+            <td colspan="3">{{$t("Ts.eventsTblCol02")}}</td>
           </tr>
-
         </thead>
         <tbody>
           <tr
@@ -61,11 +60,11 @@
             :key="el.id"
             v-bind:class="{tblEventsTrShift: el.even}"
           >
-            <td v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}">{{el.start.month}}</td>
-            <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.day}}</td>
+            <td v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}">{{$t("month."+el.start.month)}}</td>
+            <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{$t("day."+el.start.day)}}</td>
             <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-            <td v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}">{{el.end.month}}</td>
-            <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.day}}</td>
+            <td v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}">{{$t("month."+el.end.month)}}</td>
+            <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
             <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
           </tr>
         </tbody>
@@ -110,38 +109,10 @@ export default {
       return s < 10 ? "0" + s : s;
     },
 
-    async setPlatformAndRefresh(val) {
-      this.SelectedPlatform = val;
-      for (let elm in this.tdListActive) {
-        this.tdListActive[elm] = false;
-      }
-      this.tdListActive[val] = true;
-      let dateVal = Date.now();
-      //   console.log("Date stockée dans la section '"+val+"' = "+this.WfData[val].lastUpdate+" != "+dateVal );
-      if (dateVal - this.WfData[val].lastUpdate > 3 * 1000) {
-        // update the counters. We don't want to spam DE
-        // console.log("Gap="+(dateVal - this.WfData[val].lastUpdate)/1000+"s -> Update!");
-        // Fetching the data from DE
-        // https://api.warframestat.us/pc (ou platform : pc,ps4,xb1,switch)
-        console.log("Trying : " + "https://api.warframestat.us/" + val);
-        await fetch("https://api.warframestat.us/" + val, {
-          method: "GET",
-          "Content-Type": "application/json",
-        })
-          .then((res) => {
-            if (res.ok) {
-              return res.json();
-            }
-          })
-          .then((res) => {
-            this.WfData[val].data = res;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
+    computeEvents () {
+      var val = this.SelectedPlatform;
         // Now that we have data we feed the schedule with new events
-        // The recieved timestamp has the 'second precision' (000millisecond)
+        // The recieved timestamp has the 'second precision' (000 millisecond)
         //
         let obj = this.WfData[val].data; //Shortcut
         let huntStart =
@@ -178,13 +149,13 @@ export default {
               monthClass: startMonthTrack,
               month:
                 s.getMonth() != lastStartTuple.month
-                  ? this.$t("month." + s.getMonth())
-                  : "",
+                  ? s.getMonth() // this.$t("month." + s.getMonth())
+                  : 99,
               dayClass: startDayTrack,
               day:
                 s.getDay() != lastStartTuple.day
-                  ? this.$t("day." + s.getDay())
-                  : "",
+                  ? s.getDay() // this.$t("day." + s.getDay())
+                  : 99,
               hour:
                 this.twoDigitNbr(s.getHours()) +
                 ":" +
@@ -194,13 +165,13 @@ export default {
               monthClass: endMonthTrack,
               month:
                 e.getMonth() != lastEndTuple.month
-                  ? this.$t("month." + e.getMonth())
-                  : "",
+                  ? e.getMonth() // this.$t("month." + e.getMonth())
+                  : 99,
               dayClass: endDayTrack,
               day:
                 e.getDay() != lastEndTuple.day
-                  ? this.$t("day." + e.getDay())
-                  : "",
+                  ? e.getDay() // this.$t("day." + e.getDay())
+                  : 99,
               hour:
                 this.twoDigitNbr(e.getHours()) +
                 ":" +
@@ -211,6 +182,38 @@ export default {
           lastEndTuple = { month: e.getMonth(), day: e.getDay() };
           huntStart = huntStart + 150 * 60 * 1000;
         }
+    },
+
+    async setPlatformAndRefresh(val) {
+      this.SelectedPlatform = val;
+      for (let elm in this.tdListActive) {
+        this.tdListActive[elm] = false;
+      }
+      this.tdListActive[val] = true;
+      let dateVal = Date.now();
+      //   console.log("Date stockée dans la section '"+val+"' = "+this.WfData[val].lastUpdate+" != "+dateVal );
+      if (dateVal - this.WfData[val].lastUpdate > 3 * 1000) {
+        // update the counters. We don't want to spam DE
+        // console.log("Gap="+(dateVal - this.WfData[val].lastUpdate)/1000+"s -> Update!");
+        // Fetching the data from DE
+        // https://api.warframestat.us/pc (ou platform : pc,ps4,xb1,switch)
+        console.log("Trying : " + "https://api.warframestat.us/" + val);
+        await fetch("https://api.warframestat.us/" + val, {
+          method: "GET",
+          "Content-Type": "application/json",
+        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+          })
+          .then((res) => {
+            this.WfData[val].data = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        this.computeEvents(val);
         this.WfData[val].lastUpdate = Date.now();
         this.updatedFetch = true;
         // let a = new Date();

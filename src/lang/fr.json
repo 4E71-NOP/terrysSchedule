@@ -27,7 +27,8 @@
 		"3": "Mercredi",
 		"4": "Jeudi",
 		"5": "Vendredi",
-		"6": "Samedi"
+		"6": "Samedi",
+		"99": " "
 	},
 	"month": {
 		"0": "Janvier",
@@ -41,7 +42,8 @@
 		"8": "Septembre",
 		"9": "Octobre",
 		"10": "Novembre",
-		"11": "Décembre"
+		"11": "Décembre",
+		"99": " "
 	},
 	"footer": {
 		"author": "TexMex-- l'a fait",

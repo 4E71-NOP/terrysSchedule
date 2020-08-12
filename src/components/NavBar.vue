@@ -20,11 +20,13 @@
 </template>
 
 <script>
+
 export default {
   name: "NavBar",
   data() {
     return {
       dbg: "My name is NavBar.vue",
+      userChangeLang: 0,
       navBarItems: [
         {
           id: 0,
@@ -45,7 +47,9 @@ export default {
   },
   methods: {
     setI18nLang(lang) {
-      this.$i18n.locale = lang;
+      if (this.$i18n.locale != lang) {
+        this.$i18n.locale = lang;
+      }
     },
   },
 };
