@@ -47,11 +47,11 @@
       <br />
 
       <table class="tblEvents">
-        <caption>{{$t("Ts.eventsTblCaption") }}</caption>
+        <caption>{{$t("Ts.eventsTbl.caption") }}</caption>
         <thead>
           <tr>
-            <td colspan="3">{{$t("Ts.eventsTblCol01")}}</td>
-            <td colspan="3">{{$t("Ts.eventsTblCol02")}}</td>
+            <td colspan="3">{{$t("Ts.eventsTbl.c1")}}</td>
+            <td colspan="3">{{$t("Ts.eventsTbl.c2")}}</td>
           </tr>
         </thead>
         <tbody>
@@ -60,16 +60,53 @@
             :key="el.id"
             v-bind:class="{tblEventsTrShift: el.even}"
           >
-            <td v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}">{{$t("month."+el.start.month)}}</td>
+            <td
+              v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
+            >{{$t("month."+el.start.month)}}</td>
             <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{$t("day."+el.start.day)}}</td>
             <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-            <td v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}">{{$t("month."+el.end.month)}}</td>
+            <td
+              v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
+            >{{$t("month."+el.end.month)}}</td>
             <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
             <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
           </tr>
         </tbody>
       </table>
       <br />
+      <br />
+      {{$t("Ts.waiting")}}
+      <br />
+
+      <table class="tblFissures">
+        <caption>{{$t("Ts.fissuresTbl.caption")}}</caption>
+        <thead>
+          <tr>
+            <!-- <td>id</td> -->
+            <td>{{$t("Ts.fissuresTbl.c1")}}</td>
+            <td>{{$t("Ts.fissuresTbl.c2")}}</td>
+            <td>{{$t("Ts.fissuresTbl.c3")}}</td>
+            <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c4")}}</td>
+            <td>{{$t("Ts.fissuresTbl.c5")}}</td>
+            <td>{{$t("Ts.fissuresTbl.c6")}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="el in orderedFissures"
+            :key="el.id"
+            v-bind:class="{tblEventsTrShift: el.appeal}"
+          >
+            <!-- <td>{{el.id}}</td> -->
+            <td>{{el.appeal}}</td>
+            <td>{{el.tier}}</td>
+            <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
+            <td class="tblFissuresTdRight">{{el.timeLeft}}</td>
+            <td>{{el.node}}</td>
+            <td>{{el.enemy}}</td>
+          </tr>
+        </tbody>
+      </table>
       <br />
     </div>
   </div>
@@ -80,6 +117,7 @@
 // Notes:
 // *  The switch part requires CORS/Access-Control-Allow-Origin header.
 //    The code is non the less present but commented in case of a change.
+import _ from "lodash";
 
 export default {
   name: "TerrysSchedule",
@@ -96,6 +134,30 @@ export default {
       updatedFetch: false,
       localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       huntEidolonSchedule: {},
+      // Apeal is function of the expexted time spent to open the relic.
+      appealTable: {
+        Capture: 10,
+        Extermination: 7,
+        Rescue: 7,
+        Sabotage: 7,
+        Disruption: 5,
+        Excavation: 5,
+        Spy: 5,
+        Defense: 3,
+        "Mobile Defense": 3,
+        Survival: 3,
+        Defection: 0,
+        Assault: 0,
+        Hijack: 0,
+        Interception: 0,
+      },
+      timeLeftUnits: {
+        day: { v: 86400000, f: "day" },
+        hour: { v: 3600000, f: "hour" },
+        minute: { v: 60000, f: "minute" },
+        second: { v: 1000, f: "second" },
+      },
+      fissures: {},
       WfData: {
         pc: { lastUpdate: 0, data: {} },
         ps4: { lastUpdate: 0, data: {} },
@@ -104,84 +166,136 @@ export default {
       },
     };
   },
+  // Use of Lodash orderBy as the VueJs docs recommend it. Another dependency.
+  computed: {
+    orderedFissures: function () {
+      return _.orderBy(
+        this.fissures,
+        ["appeal", "tier", "type"],
+        ["desc", "asc", "asc"]
+      );
+    },
+  },
+
   methods: {
-    twoDigitNbr(s) {
-      return s < 10 ? "0" + s : s;
+    // twoDigitNbr(s) {
+    //   return s < 10 ? "0" + s : s;
+    // },
+
+    nDigitNbr(n, l) {
+      return n.toString().padStart(l, "0");
     },
 
-    computeEvents () {
-      var val = this.SelectedPlatform;
-        // Now that we have data we feed the schedule with new events
-        // The recieved timestamp has the 'second precision' (000 millisecond)
-        //
-        let obj = this.WfData[val].data; //Shortcut
-        let huntStart =
-          obj.cetusCycle.isDay == true
-            ? new Date(obj.cetusCycle.expiry).getTime()
-            : new Date(obj.cetusCycle.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
-        this;
-        var lastStartTuple = { month: 0, day: 0 };
-        var lastEndTuple = { month: 0, day: 0 };
-        var startMonthTrack = true;
-        var startDayTrack = true;
-        var endMonthTrack = true;
-        var endDayTrack = true;
-        for (let n = 0; n < 30; n++) {
-          let s = new Date(huntStart);
-          let e = new Date(huntStart + 50 * 60 * 1000);
-          if (s.getMonth() != lastStartTuple.month) {
-            startMonthTrack = !startMonthTrack;
-          }
-          if (s.getDay() != lastStartTuple.day) {
-            startDayTrack = !startDayTrack;
-          }
-          if (e.getMonth() != lastEndTuple.month) {
-            endMonthTrack = !endMonthTrack;
-          }
-          if (e.getDay() != lastEndTuple.day) {
-            endDayTrack = !endDayTrack;
-          }
-          // console.log ("nEven ="+n%2);
-          this.huntEidolonSchedule[n] = {
-            id: n,
-            even: n % 2 == 0 ? true : false,
-            start: {
-              monthClass: startMonthTrack,
-              month:
-                s.getMonth() != lastStartTuple.month
-                  ? s.getMonth() // this.$t("month." + s.getMonth())
-                  : 99,
-              dayClass: startDayTrack,
-              day:
-                s.getDay() != lastStartTuple.day
-                  ? s.getDay() // this.$t("day." + s.getDay())
-                  : 99,
-              hour:
-                this.twoDigitNbr(s.getHours()) +
-                ":" +
-                this.twoDigitNbr(s.getMinutes()),
-            },
-            end: {
-              monthClass: endMonthTrack,
-              month:
-                e.getMonth() != lastEndTuple.month
-                  ? e.getMonth() // this.$t("month." + e.getMonth())
-                  : 99,
-              dayClass: endDayTrack,
-              day:
-                e.getDay() != lastEndTuple.day
-                  ? e.getDay() // this.$t("day." + e.getDay())
-                  : 99,
-              hour:
-                this.twoDigitNbr(e.getHours()) +
-                ":" +
-                this.twoDigitNbr(e.getMinutes()),
-            },
-          };
-          lastStartTuple = { month: s.getMonth(), day: s.getDay() };
-          lastEndTuple = { month: e.getMonth(), day: e.getDay() };
-          huntStart = huntStart + 150 * 60 * 1000;
+    millisecondsToHumanTime(val) {
+      var str = "";
+      for (let t in this.timeLeftUnits) {
+        let r = Math.floor(val / this.timeLeftUnits[t].v);
+        // console.log(val + "/" + this.timeLeftUnits[t].v + "=" + r);
+        if (r >= 1) {
+          str +=
+            this.nDigitNbr(r, 2) +
+            this.$t("unitsShort." + this.timeLeftUnits[t].f) +
+            " ";
+          val -= this.timeLeftUnits[t].v * r;
         }
+      }
+      return str;
+    },
+
+    computeEvents() {
+      var val = this.SelectedPlatform;
+      // Now that we have data we feed the schedule with new events
+      // The recieved timestamp has the 'second precision' (000 millisecond)
+      //
+      let obj = this.WfData[val].data; //Shortcut
+      let huntStart =
+        obj.cetusCycle.isDay == true
+          ? new Date(obj.cetusCycle.expiry).getTime()
+          : new Date(obj.cetusCycle.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
+      this;
+      var lastStartTuple = { month: 0, day: 0 };
+      var lastEndTuple = { month: 0, day: 0 };
+      var startMonthTrack = true;
+      var startDayTrack = true;
+      var endMonthTrack = true;
+      var endDayTrack = true;
+      for (let n = 0; n < 30; n++) {
+        let s = new Date(huntStart);
+        let e = new Date(huntStart + 50 * 60 * 1000);
+        if (s.getMonth() != lastStartTuple.month) {
+          startMonthTrack = !startMonthTrack;
+        }
+        if (s.getDay() != lastStartTuple.day) {
+          startDayTrack = !startDayTrack;
+        }
+        if (e.getMonth() != lastEndTuple.month) {
+          endMonthTrack = !endMonthTrack;
+        }
+        if (e.getDay() != lastEndTuple.day) {
+          endDayTrack = !endDayTrack;
+        }
+        // console.log ("nEven ="+n%2);
+        this.huntEidolonSchedule[n] = {
+          id: n,
+          even: n % 2 == 0 ? true : false,
+          start: {
+            monthClass: startMonthTrack,
+            month:
+              s.getMonth() != lastStartTuple.month
+                ? s.getMonth() // this.$t("month." + s.getMonth())
+                : 99,
+            dayClass: startDayTrack,
+            day:
+              s.getDay() != lastStartTuple.day
+                ? s.getDay() // this.$t("day." + s.getDay())
+                : 99,
+            hour:
+              this.nDigitNbr(s.getHours(), 2) +
+              ":" +
+              this.nDigitNbr(s.getMinutes(), 2),
+          },
+          end: {
+            monthClass: endMonthTrack,
+            month:
+              e.getMonth() != lastEndTuple.month
+                ? e.getMonth() // this.$t("month." + e.getMonth())
+                : 99,
+            dayClass: endDayTrack,
+            day:
+              e.getDay() != lastEndTuple.day
+                ? e.getDay() // this.$t("day." + e.getDay())
+                : 99,
+            hour:
+              this.nDigitNbr(e.getHours(), 2) +
+              ":" +
+              this.nDigitNbr(e.getMinutes(), 2),
+          },
+        };
+        lastStartTuple = { month: s.getMonth(), day: s.getDay() };
+        lastEndTuple = { month: e.getMonth(), day: e.getDay() };
+        huntStart = huntStart + 150 * 60 * 1000;
+      }
+    },
+
+    computeFissures() {
+      let src = this.WfData[this.SelectedPlatform].data.fissures;
+      let dst = this.fissures;
+      let dstIdx = 0;
+      for (let elm in src) {
+        // console.log("---- processing : " + dstIdx + " ----");
+        let timeLeftVar = new Date(src[elm].expiry) - Date.now();
+        dst[dstIdx] = {
+          id: dstIdx,
+          appeal: this.appealTable[src[elm].missionType],
+          tier: src[elm].tier,
+          type: src[elm].missionType,
+          timeLeft: this.millisecondsToHumanTime(timeLeftVar),
+          node: src[elm].node,
+          enemy: src[elm].enemy,
+        };
+        dstIdx++;
+      }
+      //   dst = dst.sort();
     },
 
     async setPlatformAndRefresh(val) {
@@ -198,9 +312,13 @@ export default {
         // Fetching the data from DE
         // https://api.warframestat.us/pc (ou platform : pc,ps4,xb1,switch)
         console.log("Trying : " + "https://api.warframestat.us/" + val);
+
         await fetch("https://api.warframestat.us/" + val, {
           method: "GET",
           "Content-Type": "application/json",
+          headers: {
+            "Accept-Language": "en", //we take EN by default as the missionType is a string and not a numeric field... facepalm
+          },
         })
           .then((res) => {
             if (res.ok) {
@@ -213,7 +331,8 @@ export default {
           .catch((err) => {
             console.log(err);
           });
-        this.computeEvents(val);
+        this.computeEvents();
+        this.computeFissures();
         this.WfData[val].lastUpdate = Date.now();
         this.updatedFetch = true;
         // let a = new Date();

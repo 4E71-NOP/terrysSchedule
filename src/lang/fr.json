@@ -16,9 +16,48 @@
 		"p02": "Les heures sont localisées pour votre position.",
 		"p03": "Votre Zone est : ",
 		"p04": "Fraicheur des données depuis l'API : ",
-		"eventsTblCaption": "Prochaines apparitions des Sentients Eidolon",
-		"eventsTblCol01": "Début",
-		"eventsTblCol02": "Fin"
+		"eventsTbl": {
+			"caption": "Prochaines apparitions des Sentients Eidolon",
+			"c1": "Début",
+			"c2": "Fin"
+		},
+		"waiting": "Pendant qu'on attend...",
+		"fissuresTbl": {
+			"caption": "Mission reliques",
+			"c1": "intérêt",
+			"c2": "Relique",
+			"c3": "Mission",
+			"c4": "Temps restant",
+			"c5": "Localisation",
+			"c6": "Ennemi",
+			"missionType": {
+				"Assault": "Assaut",
+				"Defense": "Défense",
+				"Disruption": "Perturbation",
+				"Extermination": "Extermination",
+				"Interception":"Interception",
+				"Rescue": "Sauvetage",
+				"Sabotage": "Sabotage",
+				"Spy": "Espionnage",
+				"Survival": "Survie"
+			}
+		}
+	},
+	"units": {
+		"year": "année(s)",
+		"month": "mois",
+		"day": "jour(s)",
+		"hour": "heure(s)",
+		"minute": "minute(s)",
+		"second": "seconde(s)"
+	},
+	"unitsShort": {
+		"year": "A",
+		"month": "m",
+		"day": "j",
+		"hour": "h",
+		"minute": "m",
+		"second": "s"
 	},
 	"day": {
 		"0": "Dimanche",

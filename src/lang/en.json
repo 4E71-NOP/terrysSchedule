@@ -16,9 +16,48 @@
 		"p02": "Hours are localized for your timezone.",
 		"p03": "Your timezone is : ",
 		"p04": "API data update : ",
-		"eventsTblCaption": "Next Eidolon Sentient spawn",
-		"eventsTblCol01": "Begin",
-		"eventsTblCol02": "End"
+		"eventsTbl": {
+			"caption": "Next Eidolon Sentient spawn",
+			"c1": "Begin",
+			"c2": "End"
+		},
+		"waiting": "While we wait...",
+		"fissuresTbl": {
+			"caption": "Relic missions",
+			"c1": "Appeal",
+			"c2": "Relic",
+			"c3": "Mission",
+			"c4": "Time left",
+			"c5": "Location",
+			"c6": "Ennemy",
+			"missionType": {
+				"Assault": "Assault",
+				"Defense": "Defense",
+				"Disruption": "Disruption",
+				"Extermination": "Extermination",
+				"Interception": "Interception",
+				"Rescue": "Rescue",
+				"Sabotage": "Sabotage",
+				"Spy": "Spy",
+				"Survival": "Survival"
+			}
+		}
+	},
+	"units": {
+		"year": "years(s)",
+		"month": "month(s)",
+		"day": "day(s)",
+		"hour": "hour(s)",
+		"minute": "minute(s)",
+		"second": "second(s)"
+	},
+	"unitsShort": {
+		"year": "Y",
+		"month": "m",
+		"day": "d",
+		"hour": "h",
+		"minute": "m",
+		"second": "s"
 	},
 	"day": {
 		"0": "Sunday",

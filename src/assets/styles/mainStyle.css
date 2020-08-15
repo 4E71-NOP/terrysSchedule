@@ -173,6 +173,41 @@
 	margin-right: 10px;
 }
 
+.tblFissures {
+	width: 80%;
+	margin: auto;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #00000040;
+	border-spacing: 0px;
+	background-color: #00000010;
+	text-align: center;
+}
+
+.tblFissures>caption {
+	font-size: large;
+	font-weight: bold;
+	text-align: left;
+	background-color: #00000010;
+	padding: 10px;
+}
+.tblFissures>thead {
+	background-color: #FFC00040;
+}
+
+.tblFissures>thead>tr>td {
+	border-bottom: 2px solid black;
+}
+
+.tblFissures>tbody>tr:hover {
+	background-color: #FF800080;
+}
+
+.tblFissuresTdRight {
+	text-align: right;
+}
+
+
 /* Component : Footer*/
 
 .footer {
