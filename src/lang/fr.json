@@ -32,7 +32,10 @@
 			"c6": "Ennemi",
 			"missionType": {
 				"Assault": "Assaut",
+				"Capture":"Capture",
 				"Defense": "Défense",
+				"Excavation":"Excavation",
+				"Mobile Defense": "Défense mobile",
 				"Disruption": "Perturbation",
 				"Extermination": "Extermination",
 				"Interception":"Interception",

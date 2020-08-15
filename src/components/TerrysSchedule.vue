@@ -282,20 +282,21 @@ export default {
       let dst = this.fissures;
       let dstIdx = 0;
       for (let elm in src) {
-        // console.log("---- processing : " + dstIdx + " ----");
-        let timeLeftVar = new Date(src[elm].expiry) - Date.now();
-        dst[dstIdx] = {
-          id: dstIdx,
-          appeal: this.appealTable[src[elm].missionType],
-          tier: src[elm].tier,
-          type: src[elm].missionType,
-          timeLeft: this.millisecondsToHumanTime(timeLeftVar),
-          node: src[elm].node,
-          enemy: src[elm].enemy,
-        };
+        if (src[elm].active == true) {
+          // console.log("---- processing : " + dstIdx + " ----");
+          let timeLeftVar = new Date(src[elm].expiry) - Date.now();
+          dst[dstIdx] = {
+            id: dstIdx,
+            appeal: this.appealTable[src[elm].missionType],
+            tier: src[elm].tier,
+            type: src[elm].missionType,
+            timeLeft: this.millisecondsToHumanTime(timeLeftVar),
+            node: src[elm].node,
+            enemy: src[elm].enemy,
+          };
+        }
         dstIdx++;
       }
-      //   dst = dst.sort();
     },
 
     async setPlatformAndRefresh(val) {
