@@ -98,7 +98,7 @@
             v-bind:class="{tblEventsTrShift: el.appeal}"
           >
             <!-- <td>{{el.id}}</td> -->
-            <td>{{el.appeal}}</td>
+            <td>{{el.appeal}}/10</td>
             <td>{{el.tier}}</td>
             <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
             <td class="tblFissuresTdRight">{{el.timeLeft}}</td>
@@ -279,6 +279,7 @@ export default {
 
     computeFissures() {
       let src = this.WfData[this.SelectedPlatform].data.fissures;
+      this.fissures = {};
       let dst = this.fissures;
       let dstIdx = 0;
       for (let elm in src) {
