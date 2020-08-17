@@ -28,8 +28,9 @@
 			"c2": "Relic",
 			"c3": "Mission",
 			"c4": "Time left",
-			"c5": "Location",
-			"c6": "Ennemy",
+			"c5": "EndTime",
+			"c6": "Location",
+			"c7": "Ennemy",
 			"missionType": {
 				"Assault": "Assault",
 				"Capture": "Capture",
@@ -43,7 +44,8 @@
 				"Sabotage": "Sabotage",
 				"Spy": "Spy",
 				"Survival": "Survival"
-			}
+			},
+			"expired":"Expired"
 		}
 	},
 	"units": {

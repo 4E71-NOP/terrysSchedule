@@ -24,12 +24,13 @@
 		"waiting": "Pendant qu'on attend...",
 		"fissuresTbl": {
 			"caption": "Mission reliques",
-			"c1": "intérêt",
+			"c1": "Intérêt",
 			"c2": "Relique",
 			"c3": "Mission",
 			"c4": "Temps restant",
-			"c5": "Localisation",
-			"c6": "Ennemi",
+			"c5": "Heure de Fin",
+			"c6": "Localisation",
+			"c7": "Ennemi",
 			"missionType": {
 				"Assault": "Assaut",
 				"Capture":"Capture",
@@ -43,7 +44,8 @@
 				"Sabotage": "Sabotage",
 				"Spy": "Espionnage",
 				"Survival": "Survie"
-			}
+			},
+			"expired":"Expirée"
 		}
 	},
 	"units": {

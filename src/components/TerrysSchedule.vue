@@ -89,6 +89,7 @@
             <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c4")}}</td>
             <td>{{$t("Ts.fissuresTbl.c5")}}</td>
             <td>{{$t("Ts.fissuresTbl.c6")}}</td>
+            <td>{{$t("Ts.fissuresTbl.c7")}}</td>
           </tr>
         </thead>
         <tbody>
@@ -101,7 +102,10 @@
             <td>{{el.appeal}}/10</td>
             <td>{{el.tier}}</td>
             <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
-            <td class="tblFissuresTdRight">{{el.timeLeft}}</td>
+            <td class="tblFissuresTdRight">
+              <Timer :targetDate="el.targetDate" />
+            </td>
+            <td>{{el.endTime}}</td>
             <td>{{el.node}}</td>
             <td>{{el.enemy}}</td>
           </tr>
@@ -118,6 +122,7 @@
 // *  The switch part requires CORS/Access-Control-Allow-Origin header.
 //    The code is non the less present but commented in case of a change.
 import _ from "lodash";
+import Timer from "@/components/Timer.vue";
 
 export default {
   name: "TerrysSchedule",
@@ -283,15 +288,17 @@ export default {
       let dst = this.fissures;
       let dstIdx = 0;
       for (let elm in src) {
-        if (src[elm].active == true) {
+        let dateExpiry = new Date(src[elm].expiry);
+        if (src[elm].active == true && dateExpiry > Date.now()) {
           // console.log("---- processing : " + dstIdx + " ----");
-          let timeLeftVar = new Date(src[elm].expiry) - Date.now();
+          // let timeLeftVar = dateExpiry - Date.now();
           dst[dstIdx] = {
             id: dstIdx,
             appeal: this.appealTable[src[elm].missionType],
             tier: src[elm].tier,
             type: src[elm].missionType,
-            timeLeft: this.millisecondsToHumanTime(timeLeftVar),
+            endTime: this.nDigitNbr(dateExpiry.getHours(),2) + this.$t("unitsShort.hour") + this.nDigitNbr(dateExpiry.getUTCMinutes(),2),
+            targetDate: dateExpiry,
             node: src[elm].node,
             enemy: src[elm].enemy,
           };
@@ -341,6 +348,9 @@ export default {
         // a.getTimezoneOffset
       }
     },
+  },
+  components: {
+    Timer,
   },
 };
 </script>
