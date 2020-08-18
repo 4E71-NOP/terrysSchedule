@@ -163,6 +163,7 @@ export default {
         second: { v: 1000, f: "second" },
       },
       fissures: {},
+      // orderedFissuresTbl: {},
       WfData: {
         pc: { lastUpdate: 0, data: {} },
         ps4: { lastUpdate: 0, data: {} },
@@ -171,7 +172,7 @@ export default {
       },
     };
   },
-  // Use of Lodash orderBy as the VueJs docs recommend it. Another dependency.
+  // Use of Lo(w)dash orderBy as the VueJs docs recommend it. Another dependency.
   computed: {
     orderedFissures: function () {
       return _.orderBy(
@@ -188,10 +189,6 @@ export default {
   },
 
   methods: {
-    // twoDigitNbr(s) {
-    //   return s < 10 ? "0" + s : s;
-    // },
-
     nDigitNbr(n, l) {
       return n.toString().padStart(l, "0");
     },
@@ -211,7 +208,6 @@ export default {
       }
       return str;
     },
-
     async computeEvents() {
       var val = this.SelectedPlatform;
       // Now that we have data we feed the schedule with new events
@@ -244,7 +240,6 @@ export default {
         if (e.getDay() != lastEndTuple.day) {
           endDayTrack = !endDayTrack;
         }
-        // console.log ("nEven ="+n%2);
         this.huntEidolonSchedule[n] = {
           id: n,
           even: n % 2 == 0 ? true : false,
@@ -252,12 +247,12 @@ export default {
             monthClass: startMonthTrack,
             month:
               s.getMonth() != lastStartTuple.month
-                ? s.getMonth() // this.$t("month." + s.getMonth())
+                ? s.getMonth()
                 : 99,
             dayClass: startDayTrack,
             day:
               s.getDay() != lastStartTuple.day
-                ? s.getDay() // this.$t("day." + s.getDay())
+                ? s.getDay()
                 : 99,
             hour:
               this.nDigitNbr(s.getHours(), 2) +
@@ -268,12 +263,12 @@ export default {
             monthClass: endMonthTrack,
             month:
               e.getMonth() != lastEndTuple.month
-                ? e.getMonth() // this.$t("month." + e.getMonth())
+                ? e.getMonth()
                 : 99,
             dayClass: endDayTrack,
             day:
               e.getDay() != lastEndTuple.day
-                ? e.getDay() // this.$t("day." + e.getDay())
+                ? e.getDay()
                 : 99,
             hour:
               this.nDigitNbr(e.getHours(), 2) +
@@ -295,8 +290,6 @@ export default {
       for (let elm in src) {
         let dateExpiry = new Date(src[elm].expiry);
         if (src[elm].active == true && dateExpiry > Date.now()) {
-          // console.log("---- processing : " + dstIdx + " ----");
-          // let timeLeftVar = dateExpiry - Date.now();
           dst[dstIdx] = {
             id: dstIdx,
             appeal: this.appealTable[src[elm].missionType],
@@ -323,8 +316,7 @@ export default {
       }
       this.tdListActive[val] = true;
       let dateVal = Date.now();
-      //   console.log("Date stockée dans la section '"+val+"' = "+this.WfData[val].lastUpdate+" != "+dateVal );
-      if (dateVal - this.WfData[val].lastUpdate > 3 * 1000) {
+      if (dateVal - this.WfData[val].lastUpdate > 5 * 1000) {
         // update the counters. We don't want to spam DE
         // console.log("Gap="+(dateVal - this.WfData[val].lastUpdate)/1000+"s -> Update!");
         // Fetching the data from DE
@@ -353,8 +345,6 @@ export default {
         await this.computeFissures();
         this.WfData[val].lastUpdate = Date.now();
         this.updatedFetch = true;
-        // let a = new Date();
-        // a.getTimezoneOffset
       }
     },
   },

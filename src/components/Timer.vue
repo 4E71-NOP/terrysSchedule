@@ -25,11 +25,16 @@ export default {
       if (this.targetDate != 0 && this.targetDate >= Date.now()) {
         let c = this.targetDate - Date.now();
         this.content = this.$parent.millisecondsToHumanTime(c);
+        this.expired = false; // in case of this timer did set expired=true
+
       } else {
         this.content = this.$t("Ts.fissuresTbl.expired");
-        this.expired = 1;
+        this.expired = true;
       }
-      setTimeout(this.timerUpdate, this.interval);
+      // This will help synchronize all the timers so it's better for the eye.
+      // We consider that less than one second happened since timerUpdate fired.
+      var d = new Date();
+      setTimeout(this.timerUpdate, this.interval - d.getMilliseconds());
     },
   },
 };

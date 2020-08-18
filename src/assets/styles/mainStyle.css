@@ -212,13 +212,15 @@
 
 .timer {
 	display: block;
-	border-radius: 3px;
+	border-radius: 10px;
 	background-color: #6495ed40;
+	padding: 0px 10px 0px 10px;
+
 }
 
 .timerExpired {
 	display: block;
-	border-radius: 3px;
+	border-radius: 10px;
 	background-color: #800000d0;
 	color: #FFFFFFd0;
 	text-align: center;
