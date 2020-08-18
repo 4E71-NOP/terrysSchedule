@@ -25,11 +25,11 @@ export default {
       if (this.targetDate != 0 && this.targetDate >= Date.now()) {
         let c = this.targetDate - Date.now();
         this.content = this.$parent.millisecondsToHumanTime(c);
-        setTimeout(this.timerUpdate, this.interval);
       } else {
         this.content = this.$t("Ts.fissuresTbl.expired");
         this.expired = 1;
       }
+      setTimeout(this.timerUpdate, this.interval);
     },
   },
 };

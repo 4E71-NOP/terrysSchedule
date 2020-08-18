@@ -42,7 +42,7 @@
     <div v-if="updatedFetch===true && WfData[SelectedPlatform].lastUpdate">
       <p>{{$t("Ts.p02")}}</p>
       <p>{{$t("Ts.p03")}} {{ localTimezone }}</p>
-      <p>{{$t("Ts.p04")}} {{new Date(WfData[SelectedPlatform].data.timestamp) }}</p>
+      <p>{{$t("Ts.p04")}} {{ apiDataUpdate }}</p>
       <br />
       <br />
 
@@ -180,6 +180,11 @@ export default {
         ["desc", "asc", "asc"]
       );
     },
+    apiDataUpdate: function () {
+      return this.WfData[this.SelectedPlatform].data.timestamp
+        ? new Date(this.WfData[this.SelectedPlatform].data.timestamp)
+        : "...";
+    },
   },
 
   methods: {
@@ -207,7 +212,7 @@ export default {
       return str;
     },
 
-    computeEvents() {
+    async computeEvents() {
       var val = this.SelectedPlatform;
       // Now that we have data we feed the schedule with new events
       // The recieved timestamp has the 'second precision' (000 millisecond)
@@ -282,7 +287,7 @@ export default {
       }
     },
 
-    computeFissures() {
+    async computeFissures() {
       let src = this.WfData[this.SelectedPlatform].data.fissures;
       this.fissures = {};
       let dst = this.fissures;
@@ -297,7 +302,10 @@ export default {
             appeal: this.appealTable[src[elm].missionType],
             tier: src[elm].tier,
             type: src[elm].missionType,
-            endTime: this.nDigitNbr(dateExpiry.getHours(),2) + this.$t("unitsShort.hour") + this.nDigitNbr(dateExpiry.getUTCMinutes(),2),
+            endTime:
+              this.nDigitNbr(dateExpiry.getHours(), 2) +
+              this.$t("unitsShort.hour") +
+              this.nDigitNbr(dateExpiry.getUTCMinutes(), 2),
             targetDate: dateExpiry,
             node: src[elm].node,
             enemy: src[elm].enemy,
@@ -311,6 +319,7 @@ export default {
       this.SelectedPlatform = val;
       for (let elm in this.tdListActive) {
         this.tdListActive[elm] = false;
+        this.WfData[elm].data = {};
       }
       this.tdListActive[val] = true;
       let dateVal = Date.now();
@@ -340,8 +349,8 @@ export default {
           .catch((err) => {
             console.log(err);
           });
-        this.computeEvents();
-        this.computeFissures();
+        await this.computeEvents();
+        await this.computeFissures();
         this.WfData[val].lastUpdate = Date.now();
         this.updatedFetch = true;
         // let a = new Date();
