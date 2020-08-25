@@ -25,12 +25,12 @@
 		"fissuresTbl": {
 			"caption": "Mission reliques",
 			"c1": "Intérêt",
-			"c2": "Relique",
-			"c3": "Mission",
-			"c4": "Temps restant",
-			"c5": "Heure de Fin",
-			"c6": "Localisation",
-			"c7": "Ennemi",
+			"c2": "Mission",
+			"c3": "Relique",
+			"c4": "Ennemi",
+			"c5": "Temps restant",
+			"c6": "Heure de Fin",
+			"c7": "Localisation",
 			"missionType": {
 				"Assault": "Assaut",
 				"Capture":"Capture",

@@ -86,8 +86,8 @@
             <td>{{$t("Ts.fissuresTbl.c1")}}</td>
             <td>{{$t("Ts.fissuresTbl.c2")}}</td>
             <td>{{$t("Ts.fissuresTbl.c3")}}</td>
-            <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c4")}}</td>
-            <td>{{$t("Ts.fissuresTbl.c5")}}</td>
+            <td>{{$t("Ts.fissuresTbl.c4")}}</td>
+            <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c5")}}</td>
             <td>{{$t("Ts.fissuresTbl.c6")}}</td>
             <td>{{$t("Ts.fissuresTbl.c7")}}</td>
           </tr>
@@ -99,15 +99,15 @@
             v-bind:class="{tblEventsTrShift: el.appeal}"
           >
             <!-- <td>{{el.id}}</td> -->
-            <td>{{el.appeal}}/10</td>
-            <td>{{el.tier}}</td>
+            <td>{{el.appeal}}</td>
             <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
+            <td>{{el.tier}}</td>
+            <td>{{el.enemy}}</td>
             <td class="tblFissuresTdRight">
               <Timer :targetDate="el.targetDate" />
             </td>
             <td>{{el.endTime}}</td>
             <td>{{el.node}}</td>
-            <td>{{el.enemy}}</td>
           </tr>
         </tbody>
       </table>
@@ -141,21 +141,37 @@ export default {
       huntEidolonSchedule: {},
       // Apeal is function of the expexted time spent to open the relic.
       appealTable: {
-        Capture: 10,
-        Extermination: 7,
-        Rescue: 7,
-        Sabotage: 7,
-        Hive:6,
-        Disruption: 5,
-        Excavation: 5,
-        Spy: 5,
-        Defense: 3,
-        "Mobile Defense": 3,
-        Survival: 3,
-        Defection: 0,
-        Assault: 0,
-        Hijack: 0,
-        Interception: 0,
+        missionType: {
+          Capture: 6,
+          Extermination: 5,
+          Rescue: 5,
+          Sabotage: 5,
+          Hive: 4,
+          Disruption: 3,
+          Excavation: 3,
+          Spy: 3,
+          Defense: 2,
+          "Mobile Defense": 2,
+          Survival: 2,
+          Defection: 1,
+          Assault: 1,
+          Hijack: 1,
+          Interception: 1,
+        },
+        enemy: {
+          Infested: 1.2,
+          Corpus: 1.1,
+          Crossfire: 1,
+          Orokin:0.9,
+          Grineer: 0.8,
+        },
+        tier: {
+          Lith: 1.2,
+          Meso: 1.1,
+          Neo: 1,
+          Axi: 0.9,
+          Requiem: 0.8,
+        },
       },
       timeLeftUnits: {
         day: { v: 86400000, f: "day" },
@@ -246,15 +262,9 @@ export default {
           even: n % 2 == 0 ? true : false,
           start: {
             monthClass: startMonthTrack,
-            month:
-              s.getMonth() != lastStartTuple.month
-                ? s.getMonth()
-                : 99,
+            month: s.getMonth() != lastStartTuple.month ? s.getMonth() : 99,
             dayClass: startDayTrack,
-            day:
-              s.getDay() != lastStartTuple.day
-                ? s.getDay()
-                : 99,
+            day: s.getDay() != lastStartTuple.day ? s.getDay() : 99,
             hour:
               this.nDigitNbr(s.getHours(), 2) +
               ":" +
@@ -262,15 +272,9 @@ export default {
           },
           end: {
             monthClass: endMonthTrack,
-            month:
-              e.getMonth() != lastEndTuple.month
-                ? e.getMonth()
-                : 99,
+            month: e.getMonth() != lastEndTuple.month ? e.getMonth() : 99,
             dayClass: endDayTrack,
-            day:
-              e.getDay() != lastEndTuple.day
-                ? e.getDay()
-                : 99,
+            day: e.getDay() != lastEndTuple.day ? e.getDay() : 99,
             hour:
               this.nDigitNbr(e.getHours(), 2) +
               ":" +
@@ -293,7 +297,12 @@ export default {
         if (src[elm].active == true && dateExpiry > Date.now()) {
           dst[dstIdx] = {
             id: dstIdx,
-            appeal: this.appealTable[src[elm].missionType],
+            // appeal: this.appealTable[src[elm].missionType],
+            appeal:
+            Math.round (
+              this.appealTable.missionType[src[elm].missionType] *
+              this.appealTable.enemy[src[elm].enemy] *
+              this.appealTable.tier[src[elm].tier]*100)/100,
             tier: src[elm].tier,
             type: src[elm].missionType,
             endTime:

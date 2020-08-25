@@ -25,12 +25,12 @@
 		"fissuresTbl": {
 			"caption": "Relic missions",
 			"c1": "Appeal",
-			"c2": "Relic",
-			"c3": "Mission",
-			"c4": "Time left",
-			"c5": "EndTime",
-			"c6": "Location",
-			"c7": "Ennemy",
+			"c2": "Mission",
+			"c3": "Relic",
+			"c4": "Ennemy",
+			"c5": "Time left",
+			"c6": "EndTime",
+			"c7": "Location",
 			"missionType": {
 				"Assault": "Assault",
 				"Capture": "Capture",
