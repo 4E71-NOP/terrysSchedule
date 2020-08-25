@@ -145,6 +145,7 @@ export default {
         Extermination: 7,
         Rescue: 7,
         Sabotage: 7,
+        Hive:6,
         Disruption: 5,
         Excavation: 5,
         Spy: 5,
