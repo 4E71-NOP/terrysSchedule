@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from "@/router.js"; // 'router' as in 'must be exactly 'router' and nobody told you!!!
+import router from "@/router.js"; // 'router' as in "must be exactly 'router' and nobody told you!!!"
 // import store from "./store";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
