@@ -404,10 +404,8 @@ export default {
     endLineWork(d, s, e) {
       d.lastStartTuple = { month: s.getMonth(), day: s.getDay() };
       d.lastEndTuple = { month: e.getMonth(), day: e.getDay() };
-      //   console.log("d.modeMgmt=" + d.modeMgmt);
       switch (d.modeMgmt) {
         case "cambionDrift":
-          //   console.log("d.mode=" + d.mode);
           d.mode = d.mode == "vome" ? "fass" : "vome";
           break;
         default:
@@ -421,16 +419,6 @@ export default {
 
       var objDataSrc = this.WfData[val].data[objDef.planetEntry];
       var objTarget = this[objDef.ObjTarget];
-      //   console.log(
-      //     "objDataSrc[" +
-      //       objDef.stateEntryName +
-      //       "]=" +
-      //       objDataSrc[objDef.stateEntryName]
-      //   );
-      let huntStart =
-        objDataSrc[objDef.stateEntryName] == true
-          ? new Date(objDataSrc.expiry).getTime()
-          : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
 
       var d = {
         idx: 0,
@@ -444,16 +432,15 @@ export default {
         endDayTrack: true,
       };
 
-      //   console.log(
-      //     "d : [ idx:" +
-      //       d.idx +
-      //       ", mode:" +
-      //       d.mode +
-      //       ", modeMgmt:" +
-      //       d.modeMgmt +
-      //       "]"
-      //   );
-      //   var idx = 0;
+      let huntStartComp = true;
+      if (d.modeMgmt == "cambionDrift") {
+        huntStartComp = "vome";
+      }
+      let huntStart =
+        objDataSrc[objDef.stateEntryName] == huntStartComp
+          ? new Date(objDataSrc.expiry).getTime()
+          : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
+
       for (let n = 0; n < objDef.nbrLines; n++) {
         let s = new Date(huntStart);
         let e = new Date(huntStart + objDef.periodB);
