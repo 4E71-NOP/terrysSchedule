@@ -230,7 +230,7 @@
 <script>
 // ----------------------------------------
 // Notes:
-// *  The switch part requires CORS/Access-Control-Allow-Origin header.
+// *  The switch console part requires CORS/Access-Control-Allow-Origin header.
 //    The code is non the less present but commented in case of a change.
 import _ from "lodash";
 import Timer from "@/components/Timer.vue";
@@ -432,14 +432,11 @@ export default {
         endDayTrack: true,
       };
 
-      let huntStartComp = true;
-      if (d.modeMgmt == "cambionDrift") {
-        huntStartComp = "vome";
-      }
+      let huntStartComp = d.modeMgmt == "cambionDrift" ? "vome" : true;
       let huntStart =
         objDataSrc[objDef.stateEntryName] == huntStartComp
           ? new Date(objDataSrc.expiry).getTime()
-          : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
+          : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp as starting point
 
       for (let n = 0; n < objDef.nbrLines; n++) {
         let s = new Date(huntStart);
