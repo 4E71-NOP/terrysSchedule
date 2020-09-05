@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <Title />
-    <NavBar />
-    <router-view />
-    <Footer />
-  </div>
+  <v-app>
+    <v-main>
+      <div>
+        <Title />
+        <NavBar />
+        <router-view />
+        <Footer />
+      </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>

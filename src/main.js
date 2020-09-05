@@ -14,8 +14,13 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+Vue.use(Vuetify);
+
 new Vue({
   router,
+  vuetify: new Vuetify( ),
   // store,
   render: h => h(App),
 }).$mount('#app')

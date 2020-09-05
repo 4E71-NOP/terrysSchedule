@@ -1,9 +1,6 @@
 <template>
   <div id="terrrySchedule" class="RouterViewBlock">
     <h3>{{ $t('Ts.p01') }}</h3>
-    <br />
-    <br />
-    <br />
     <table class="tblSelectionPlatform">
       <caption>{{$t('Ts.tbl01Caption')}}</caption>
       <tr>
@@ -40,77 +37,191 @@
     <br />
     <br />
     <div v-if="updatedFetch===true && WfData[SelectedPlatform].lastUpdate">
-      <p>{{$t("Ts.p02")}}</p>
-      <p>{{$t("Ts.p03")}} {{ localTimezone }}</p>
-      <p>{{$t("Ts.p04")}} {{ apiDataUpdate }}</p>
-      <br />
-      <br />
+      <p>
+        {{$t("Ts.p02")}}
+        <br />
+        {{$t("Ts.p03")}} {{ localTimezone }}
+        <br />
+        {{$t("Ts.p04")}} {{ apiDataUpdate }}
+      </p>
 
-      <table class="tblEvents">
-        <caption>{{$t("Ts.eventsTbl.caption") }}</caption>
-        <thead>
-          <tr>
-            <td colspan="3">{{$t("Ts.eventsTbl.c1")}}</td>
-            <td colspan="3">{{$t("Ts.eventsTbl.c2")}}</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="el in huntEidolonSchedule"
-            :key="el.id"
-            v-bind:class="{tblEventsTrShift: el.even}"
-          >
-            <td
-              v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
-            >{{$t("month."+el.start.month)}}</td>
-            <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{$t("day."+el.start.day)}}</td>
-            <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-            <td
-              v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
-            >{{$t("month."+el.end.month)}}</td>
-            <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
-            <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <br />
-      {{$t("Ts.waiting")}}
-      <br />
+      <!-- -->
+      <v-tabs
+        v-model="tab"
+        background-color="blue accent-4"
+        class="elevation-2"
+        dark
+        :centered="centered"
+        :grow="grow"
+        :vertical="vertical"
+        :right="right"
+        :prev-icon="prevIcon ? 'mdi-arrow-left-bold-box-outline' : undefined"
+        :next-icon="nextIcon ? 'mdi-arrow-right-bold-box-outline' : undefined"
+        :icons-and-text="icons"
+      >
+        <v-tabs-slider></v-tabs-slider>
 
-      <table class="tblFissures">
-        <caption>{{$t("Ts.fissuresTbl.caption")}}</caption>
-        <thead>
-          <tr>
-            <!-- <td>id</td> -->
-            <td>{{$t("Ts.fissuresTbl.c1")}}</td>
-            <td>{{$t("Ts.fissuresTbl.c2")}}</td>
-            <td>{{$t("Ts.fissuresTbl.c3")}}</td>
-            <td>{{$t("Ts.fissuresTbl.c4")}}</td>
-            <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c5")}}</td>
-            <td>{{$t("Ts.fissuresTbl.c6")}}</td>
-            <td>{{$t("Ts.fissuresTbl.c7")}}</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="el in orderedFissures"
-            :key="el.id"
-            v-bind:class="{tblEventsTrShift: el.appeal}"
-          >
-            <!-- <td>{{el.id}}</td> -->
-            <td>{{el.appeal}}</td>
-            <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
-            <td>{{el.tier}}</td>
-            <td>{{el.enemy}}</td>
-            <td class="tblFissuresTdRight">
-              <Timer :targetDate="el.targetDate" />
-            </td>
-            <td>{{el.endTime}}</td>
-            <td>{{el.node}}</td>
-          </tr>
-        </tbody>
-      </table>
+        <v-tab v-for="i in tabs" :key="i" :href="`#tab-${i}`">
+          {{$t('Ts.Tabs.'+i)}}
+          <v-icon v-if="icons">mdi-phone</v-icon>
+        </v-tab>
+
+        <!-- 
+		--------------------------------------------------------------------------------
+		Eidolon 
+        -->
+        <v-tab-item value="tab-1">
+          <table class="tblEvents">
+            <caption>{{$t("Ts.eventTbl.cetus.caption") }}</caption>
+            <thead>
+              <tr>
+                <td colspan="3">{{$t("Ts.eventTbl.cetus.c1")}}</td>
+                <td colspan="3">{{$t("Ts.eventTbl.cetus.c2")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in huntEidolonSchedule"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.even}"
+              >
+                <td
+                  v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
+                >{{$t("month."+el.start.month)}}</td>
+                <td
+                  v-bind:class="{tblEventsTdDayShift: el.start.dayClass}"
+                >{{$t("day."+el.start.day)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
+                <td
+                  v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
+                >{{$t("month."+el.end.month)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        </v-tab-item>
+        <!-- 
+		--------------------------------------------------------------------------------
+		Orbis valley 
+        -->
+        <v-tab-item value="tab-2">
+          <table class="tblEvents">
+            <caption>{{$t("Ts.eventTbl.orbVallis.caption") }}</caption>
+            <thead>
+              <tr>
+                <td>{{$t("Ts.eventTbl.orbVallis.c1")}}</td>
+                <td colspan="3">{{$t("Ts.eventTbl.orbVallis.c2")}}</td>
+                <td colspan="3">{{$t("Ts.eventTbl.orbVallis.c3")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in orbVallisSchedule"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.even}"
+              >
+                <td>{{$t('Ts.eventTbl.orbVallis.type.'+el.start.type)}}</td>
+                <td
+                  v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
+                >{{$t("month."+el.start.month)}}</td>
+                <td
+                  v-bind:class="{tblEventsTdDayShift: el.start.dayClass}"
+                >{{$t("day."+el.start.day)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
+                <td
+                  v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
+                >{{$t("month."+el.end.month)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        </v-tab-item>
+        <!-- 
+		--------------------------------------------------------------------------------
+		Cambion drift
+        -->
+        <v-tab-item value="tab-3">
+          <table class="tblEvents">
+            <caption>{{$t("Ts.eventTbl.cambionDrift.caption") }}</caption>
+            <thead>
+              <tr>
+                <td>{{$t("Ts.eventTbl.cambionDrift.c1")}}</td>
+                <td colspan="3">{{$t("Ts.eventTbl.cambionDrift.c2")}}</td>
+                <td colspan="3">{{$t("Ts.eventTbl.cambionDrift.c3")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in cambionDriftSchedule"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.even}"
+              >
+                <td>{{$t("Ts.eventTbl.cambionDrift.type."+el.start.type)}}</td>
+                <td
+                  v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
+                >{{$t("month."+el.start.month)}}</td>
+                <td
+                  v-bind:class="{tblEventsTdDayShift: el.start.dayClass}"
+                >{{$t("day."+el.start.day)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
+                <td
+                  v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
+                >{{$t("month."+el.end.month)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
+                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        </v-tab-item>
+        <!-- 
+		--------------------------------------------------------------------------------
+		Fissures 
+        -->
+        <v-tab-item value="tab-4">
+          {{$t("Ts.waiting")}}
+          <br />
+
+          <table class="tblFissures">
+            <caption>{{$t("Ts.fissuresTbl.caption")}}</caption>
+            <thead>
+              <tr>
+                <!-- <td>id</td> -->
+                <td>{{$t("Ts.fissuresTbl.c1")}}</td>
+                <td>{{$t("Ts.fissuresTbl.c2")}}</td>
+                <td>{{$t("Ts.fissuresTbl.c3")}}</td>
+                <td>{{$t("Ts.fissuresTbl.c4")}}</td>
+                <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c5")}}</td>
+                <td>{{$t("Ts.fissuresTbl.c6")}}</td>
+                <td>{{$t("Ts.fissuresTbl.c7")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in orderedFissures"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.appeal}"
+              >
+                <!-- <td>{{el.id}}</td> -->
+                <td>{{el.appeal}}</td>
+                <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
+                <td>{{el.tier}}</td>
+                <td>{{el.enemy}}</td>
+                <td class="tblFissuresTdRight">
+                  <Timer :targetDate="el.targetDate" />
+                </td>
+                <td>{{el.endTime}}</td>
+                <td>{{el.node}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        </v-tab-item>
+      </v-tabs>
       <br />
     </div>
   </div>
@@ -129,6 +240,18 @@ export default {
   data() {
     return {
       dbg: "My name is TerrysSchedule.vue",
+      tab: null,
+      text: "",
+      icons: false,
+      centered: false,
+      grow: true,
+      vertical: false,
+      prevIcon: false,
+      nextIcon: false,
+      right: false,
+
+      tabs: 4,
+
       tdListActive: {
         pc: true,
         ps4: false,
@@ -138,7 +261,44 @@ export default {
       SelectedPlatform: "pc",
       updatedFetch: false,
       localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+
+      PlanetEventDefinitions: {
+        cetus: {
+          planetEntry: "cetusCycle",
+          stateEntryName: "isDay",
+          nbrLines: 30,
+          showBothPeriod: false,
+          modeMgmt: "trueFalse",
+          ObjTarget: "huntEidolonSchedule",
+          periodA: 100 * 60 * 1000,
+          periodB: 50 * 60 * 1000,
+        },
+        orbVallis: {
+          planetEntry: "vallisCycle",
+          stateEntryName: "isWarm",
+          nbrLines: 15,
+          showBothPeriod: true,
+          modeMgmt: "trueFalse",
+          ObjTarget: "orbVallisSchedule",
+          periodA: 400 * 1000,
+          periodB: 20 * 60 * 1000,
+        },
+        cambionDrift: {
+          planetEntry: "cambionCycle",
+          stateEntryName: "active",
+          nbrLines: 10,
+          showBothPeriod: true,
+          modeMgmt: "cambionDrift",
+          ObjTarget: "cambionDriftSchedule",
+          periodA: 50 * 60 * 1000,
+          periodB: 100 * 60 * 1000,
+        },
+      },
+
       huntEidolonSchedule: {},
+      orbVallisSchedule: {},
+      cambionDriftSchedule: {},
+
       // Apeal is function of the expexted time spent to open the relic.
       appealTable: {
         missionType: {
@@ -162,7 +322,7 @@ export default {
           Infested: 1.2,
           Corpus: 1.1,
           Crossfire: 1,
-          Orokin:0.9,
+          Orokin: 0.9,
           Grineer: 0.8,
         },
         tier: {
@@ -173,14 +333,7 @@ export default {
           Requiem: 0.8,
         },
       },
-      timeLeftUnits: {
-        day: { v: 86400000, f: "day" },
-        hour: { v: 3600000, f: "hour" },
-        minute: { v: 60000, f: "minute" },
-        second: { v: 1000, f: "second" },
-      },
       fissures: {},
-      // orderedFissuresTbl: {},
       WfData: {
         pc: { lastUpdate: 0, data: {} },
         ps4: { lastUpdate: 0, data: {} },
@@ -189,7 +342,7 @@ export default {
       },
     };
   },
-  // Use of Lo(w)dash orderBy as the VueJs docs recommend it. Another dependency.
+  // Use of Lo(w)dash orderBy as the VueJs docs recommend it. Another dependency...
   computed: {
     orderedFissures: function () {
       return _.orderBy(
@@ -210,80 +363,122 @@ export default {
       return n.toString().padStart(l, "0");
     },
 
-    millisecondsToHumanTime(val) {
-      var str = "";
-      for (let t in this.timeLeftUnits) {
-        let r = Math.floor(val / this.timeLeftUnits[t].v);
-        // console.log(val + "/" + this.timeLeftUnits[t].v + "=" + r);
-        if (r >= 1) {
-          str +=
-            this.nDigitNbr(r, 2) +
-            this.$t("unitsShort." + this.timeLeftUnits[t].f) +
-            " ";
-          val -= this.timeLeftUnits[t].v * r;
-        }
+    createTableEntry(t, d, mode) {
+      var currentday = 99;
+      switch (mode) {
+        case 0:
+          currentday = t.getDay() != d.lastStartTuple.day ? t.getDay() : 99;
+          break;
+        case 1:
+          currentday = t.getDay() != d.lastEndTuple.day ? t.getDay() : 99;
+          break;
       }
-      return str;
+
+      return {
+        type: d.mode,
+        monthClass: d.startMonthTrack,
+        month: t.getMonth() != d.lastStartTuple.month ? t.getMonth() : 99,
+        dayClass: mode == 0 ? d.startDayTrack : d.endDayTrack,
+        day: currentday,
+        hour:
+          this.nDigitNbr(t.getHours(), 2) +
+          ":" +
+          this.nDigitNbr(t.getMinutes(), 2),
+      };
     },
-    async computeEvents() {
+    tupleTrack(d, s, e) {
+      if (s.getMonth() != d.lastStartTuple.month) {
+        d.startMonthTrack = !d.startMonthTrack;
+      }
+      if (s.getDay() != d.lastStartTuple.day) {
+        d.startDayTrack = !d.startDayTrack;
+      }
+      if (e.getMonth() != d.lastEndTuple.month) {
+        d.endMonthTrack = !d.endMonthTrack;
+      }
+      if (e.getDay() != d.lastEndTuple.day) {
+        d.endDayTrack = !d.endDayTrack;
+      }
+    },
+
+    endLineWork(d, s, e) {
+      d.lastStartTuple = { month: s.getMonth(), day: s.getDay() };
+      d.lastEndTuple = { month: e.getMonth(), day: e.getDay() };
+      //   console.log("d.modeMgmt=" + d.modeMgmt);
+      switch (d.modeMgmt) {
+        case "cambionDrift":
+          //   console.log("d.mode=" + d.mode);
+          d.mode = d.mode == "vome" ? "fass" : "vome";
+          break;
+        default:
+          d.mode = !d.mode;
+          break;
+      }
+      d.idx++;
+    },
+    async computeEvents(objDef) {
       var val = this.SelectedPlatform;
-      // Now that we have data we feed the schedule with new events
-      // The recieved timestamp has the 'second precision' (000 millisecond)
-      //
-      let obj = this.WfData[val].data; //Shortcut
+
+      var objDataSrc = this.WfData[val].data[objDef.planetEntry];
+      var objTarget = this[objDef.ObjTarget];
+      //   console.log(
+      //     "objDataSrc[" +
+      //       objDef.stateEntryName +
+      //       "]=" +
+      //       objDataSrc[objDef.stateEntryName]
+      //   );
       let huntStart =
-        obj.cetusCycle.isDay == true
-          ? new Date(obj.cetusCycle.expiry).getTime()
-          : new Date(obj.cetusCycle.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
-      this;
-      var lastStartTuple = { month: 0, day: 0 };
-      var lastEndTuple = { month: 0, day: 0 };
-      var startMonthTrack = true;
-      var startDayTrack = true;
-      var endMonthTrack = true;
-      var endDayTrack = true;
-      for (let n = 0; n < 30; n++) {
+        objDataSrc[objDef.stateEntryName] == true
+          ? new Date(objDataSrc.expiry).getTime()
+          : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp
+
+      var d = {
+        idx: 0,
+        mode: objDataSrc[objDef.stateEntryName],
+        modeMgmt: objDef.modeMgmt,
+        lastStartTuple: { month: 0, day: 0 },
+        lastEndTuple: { month: 0, day: 0 },
+        startMonthTrack: true,
+        startDayTrack: true,
+        endMonthTrack: true,
+        endDayTrack: true,
+      };
+
+      //   console.log(
+      //     "d : [ idx:" +
+      //       d.idx +
+      //       ", mode:" +
+      //       d.mode +
+      //       ", modeMgmt:" +
+      //       d.modeMgmt +
+      //       "]"
+      //   );
+      //   var idx = 0;
+      for (let n = 0; n < objDef.nbrLines; n++) {
         let s = new Date(huntStart);
-        let e = new Date(huntStart + 50 * 60 * 1000);
-        if (s.getMonth() != lastStartTuple.month) {
-          startMonthTrack = !startMonthTrack;
-        }
-        if (s.getDay() != lastStartTuple.day) {
-          startDayTrack = !startDayTrack;
-        }
-        if (e.getMonth() != lastEndTuple.month) {
-          endMonthTrack = !endMonthTrack;
-        }
-        if (e.getDay() != lastEndTuple.day) {
-          endDayTrack = !endDayTrack;
-        }
-        this.huntEidolonSchedule[n] = {
-          id: n,
-          even: n % 2 == 0 ? true : false,
-          start: {
-            monthClass: startMonthTrack,
-            month: s.getMonth() != lastStartTuple.month ? s.getMonth() : 99,
-            dayClass: startDayTrack,
-            day: s.getDay() != lastStartTuple.day ? s.getDay() : 99,
-            hour:
-              this.nDigitNbr(s.getHours(), 2) +
-              ":" +
-              this.nDigitNbr(s.getMinutes(), 2),
-          },
-          end: {
-            monthClass: endMonthTrack,
-            month: e.getMonth() != lastEndTuple.month ? e.getMonth() : 99,
-            dayClass: endDayTrack,
-            day: e.getDay() != lastEndTuple.day ? e.getDay() : 99,
-            hour:
-              this.nDigitNbr(e.getHours(), 2) +
-              ":" +
-              this.nDigitNbr(e.getMinutes(), 2),
-          },
+        let e = new Date(huntStart + objDef.periodB);
+        this.tupleTrack(d, s, e);
+        objTarget[d.idx] = {
+          id: d.idx,
+          even: d.idx % 2 == 0 ? true : false,
+          start: this.createTableEntry(s, d, 0),
+          end: this.createTableEntry(e, d, 1),
         };
-        lastStartTuple = { month: s.getMonth(), day: s.getDay() };
-        lastEndTuple = { month: e.getMonth(), day: e.getDay() };
-        huntStart = huntStart + 150 * 60 * 1000;
+        this.endLineWork(d, s, e);
+
+        if (objDef.showBothPeriod == true) {
+          let e2 = new Date(huntStart + objDef.periodA + objDef.periodB);
+          this.tupleTrack(d, e, e2);
+
+          objTarget[d.idx] = {
+            id: d.idx,
+            even: d.idx % 2 == 0 ? true : false,
+            start: this.createTableEntry(e, d, 0),
+            end: this.createTableEntry(e2, d, 1),
+          };
+          this.endLineWork(d, e, e2);
+        }
+        huntStart = huntStart + (objDef.periodA + objDef.periodB);
       }
     },
 
@@ -299,10 +494,12 @@ export default {
             id: dstIdx,
             // appeal: this.appealTable[src[elm].missionType],
             appeal:
-            Math.round (
-              this.appealTable.missionType[src[elm].missionType] *
-              this.appealTable.enemy[src[elm].enemy] *
-              this.appealTable.tier[src[elm].tier]*100)/100,
+              Math.round(
+                this.appealTable.missionType[src[elm].missionType] *
+                  this.appealTable.enemy[src[elm].enemy] *
+                  this.appealTable.tier[src[elm].tier] *
+                  100
+              ) / 100,
             tier: src[elm].tier,
             type: src[elm].missionType,
             endTime:
@@ -330,7 +527,7 @@ export default {
         // update the counters. We don't want to spam DE
         // console.log("Gap="+(dateVal - this.WfData[val].lastUpdate)/1000+"s -> Update!");
         // Fetching the data from DE
-        // https://api.warframestat.us/pc (ou platform : pc,ps4,xb1,switch)
+        // https://api.warframestat.us/pc (where platform : pc,ps4,xb1,switch)
         console.log("Trying : " + "https://api.warframestat.us/" + val);
 
         await fetch("https://api.warframestat.us/" + val, {
@@ -351,7 +548,9 @@ export default {
           .catch((err) => {
             console.log(err);
           });
-        await this.computeEvents();
+        await this.computeEvents(this.PlanetEventDefinitions.cetus);
+        await this.computeEvents(this.PlanetEventDefinitions.orbVallis);
+        await this.computeEvents(this.PlanetEventDefinitions.cambionDrift);
         await this.computeFissures();
         this.WfData[val].lastUpdate = Date.now();
         this.updatedFetch = true;

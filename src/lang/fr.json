@@ -11,15 +11,43 @@
 		"p02": "Ci-après une liste d'outils d'aide pour calculer l'heure locale."
 	},
 	"Ts": {
+		"Tabs": {
+			"1": "Eidolon",
+			"2": "Vallée d'Orbis",
+			"3": "Cambion",
+			"4": "Fissures"
+		},
 		"p01": "Organisons nous!",
 		"tbl01Caption": "Plateforme",
 		"p02": "Les heures sont localisées pour votre position.",
 		"p03": "Votre Zone est : ",
 		"p04": "Fraicheur des données depuis l'API : ",
-		"eventsTbl": {
-			"caption": "Prochaines apparitions des Sentients Eidolon",
-			"c1": "Début",
-			"c2": "Fin"
+		"eventTbl": {
+			"cetus": {
+				"caption": "Prochaines apparitions des Sentients Eidolon",
+				"c1": "Début",
+				"c2": "Fin"
+			},
+			"orbVallis": {
+				"caption": "Prochaines périodes chaudes",
+				"c1": "Type",
+				"c2": "Début",
+				"c3": "Fin",
+				"type": {
+					"false": "Froid",
+					"true": "Chaud"
+				}
+			},
+			"cambionDrift": {
+				"caption": "Alternance Vome / Fass ",
+				"c1": "Entité",
+				"c2": "Begin",
+				"c3": "End",
+				"type": {
+					"vome": "Vome",
+					"fass": "Fass"
+				}
+			}
 		},
 		"waiting": "Pendant qu'on attend...",
 		"fissuresTbl": {
@@ -33,20 +61,20 @@
 			"c7": "Localisation",
 			"missionType": {
 				"Assault": "Assaut",
-				"Capture":"Capture",
+				"Capture": "Capture",
 				"Defense": "Défense",
 				"Disruption": "Perturbation",
-				"Excavation":"Excavation",
+				"Excavation": "Excavation",
 				"Extermination": "Extermination",
-				"Hive":"Ruche",
-				"Interception":"Interception",
+				"Hive": "Ruche",
+				"Interception": "Interception",
 				"Mobile Defense": "Défense mobile",
 				"Rescue": "Sauvetage",
 				"Sabotage": "Sabotage",
 				"Spy": "Espionnage",
 				"Survival": "Survie"
 			},
-			"expired":"Expirée"
+			"expired": "Expirée"
 		}
 	},
 	"units": {

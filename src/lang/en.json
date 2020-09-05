@@ -11,15 +11,43 @@
 		"p02": "Here is a list of tool to help with timezones."
 	},
 	"Ts": {
+		"Tabs": {
+			"1": "Eidolon",
+			"2": "Orb Vallis",
+			"3": "Cambion",
+			"4": "Fissures"
+		},
 		"p01": "Lets organize!",
 		"tbl01Caption": "Plateform",
 		"p02": "Hours are localized for your timezone.",
 		"p03": "Your timezone is : ",
 		"p04": "API data update : ",
-		"eventsTbl": {
-			"caption": "Next Eidolon Sentient spawn",
-			"c1": "Begin",
-			"c2": "End"
+		"eventTbl": {
+			"cetus": {
+				"caption": "Next Eidolon Sentient spawn",
+				"c1": "Begin",
+				"c2": "End"
+			},
+			"orbVallis": {
+				"caption": "Next warm periods",
+				"c1": "Type",
+				"c2": "Begin",
+				"c3": "End",
+				"type": {
+					"false": "Cold",
+					"true": "Warm"
+				}
+			},
+			"cambionDrift": {
+				"caption": "Vome / Fass alternance",
+				"c1": "Entity",
+				"c2": "Begin",
+				"c3": "End",
+				"type": {
+					"vome": "Vome",
+					"fass": "Fass"
+				}
+			}
 		},
 		"waiting": "While we wait...",
 		"fissuresTbl": {
@@ -38,7 +66,7 @@
 				"Disruption": "Disruption",
 				"Excavation": "Excavation",
 				"Extermination": "Extermination",
-				"Hive":"Hive",
+				"Hive": "Hive",
 				"Interception": "Interception",
 				"Mobile Defense": "Mobile defense",
 				"Rescue": "Rescue",
@@ -46,7 +74,7 @@
 				"Spy": "Spy",
 				"Survival": "Survival"
 			},
-			"expired":"Expired"
+			"expired": "Expired"
 		}
 	},
 	"units": {

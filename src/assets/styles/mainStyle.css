@@ -19,6 +19,7 @@
 	border-radius: 10px 10px 0px 0px;
 	box-shadow: 0px 10px 5px #00000080;
 	font-weight: bold;
+	text-align: left;
 }
 
 /* Component NavBar */
@@ -122,7 +123,7 @@
 }
 
 .tblEvents {
-	width: 50%;
+	width: 90%;
 	margin: auto;
 	border-width: 5px;
 	border-style: solid;
@@ -149,7 +150,8 @@
 }
 
 .tblEvents>tbody>tr:hover {
-	background-color: #FF800080;
+	background-color: #00004080;
+	color: #FFFFFF;
 }
 
 .tblEventsTrShift {
@@ -201,7 +203,8 @@
 }
 
 .tblFissures>tbody>tr:hover {
-	background-color: #FF800080;
+	background-color: #00004080;
+	color: #FFFFFF;
 }
 
 .tblFissuresTdRight {
@@ -215,7 +218,6 @@
 	border-radius: 10px;
 	background-color: #6495ed40;
 	padding: 0px 10px 0px 10px;
-
 }
 
 .timerExpired {
