@@ -221,6 +221,84 @@
           </table>
           <br />
         </v-tab-item>
+        <!-- --------------------------------------------------------------------------------
+        Bounties Ostrons
+        -->
+        <v-tab-item value="tab-5">
+          <table class="tblEvents">
+            <caption>{{$t("Ts.eventTbl.ostronsBounties.caption") }}</caption>
+            <thead>
+              <tr>
+                <td>{{$t("Ts.eventTbl.ostronsBounties.c1")}}</td>
+                <td>{{$t("Ts.eventTbl.ostronsBounties.c2")}}</td>
+                <td>{{$t("Ts.eventTbl.ostronsBounties.c3")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in bountiesDefinitions.ostrons.table"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.even}"
+              >
+                <td>{{el.type}}</td>
+                <td>{{el.standingStages}}</td>
+                <td>{{el.enemyLevels}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </v-tab-item>
+        <!-- --------------------------------------------------------------------------------
+        Bounties Solaris
+        -->
+        <v-tab-item value="tab-6">
+          <table class="tblEvents">
+            <caption>{{$t("Ts.eventTbl.solarisBounties.caption") }}</caption>
+            <thead>
+              <tr>
+                <td>{{$t("Ts.eventTbl.solarisBounties.c1")}}</td>
+                <td>{{$t("Ts.eventTbl.solarisBounties.c2")}}</td>
+                <td>{{$t("Ts.eventTbl.solarisBounties.c3")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in bountiesDefinitions.solarisUnited.table"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.even}"
+              >
+                <td>{{el.type}}</td>
+                <td>{{el.standingStages}}</td>
+                <td>{{el.enemyLevels}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </v-tab-item>
+        <!-- --------------------------------------------------------------------------------
+        Bounties Entrati
+        -->
+        <v-tab-item value="tab-7">
+          <table class="tblEvents">
+            <caption>{{$t("Ts.eventTbl.entratiBounties.caption") }}</caption>
+            <thead>
+              <tr>
+                <td>{{$t("Ts.eventTbl.entratiBounties.c1")}}</td>
+                <td>{{$t("Ts.eventTbl.entratiBounties.c2")}}</td>
+                <td>{{$t("Ts.eventTbl.entratiBounties.c3")}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in bountiesDefinitions.entrati.table"
+                :key="el.id"
+                v-bind:class="{tblEventsTrShift: el.even}"
+              >
+                <td>{{el.type}}</td>
+                <td>{{el.standingStages}}</td>
+                <td>{{el.enemyLevels}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </v-tab-item>
       </v-tabs>
       <br />
     </div>
@@ -239,6 +317,15 @@ export default {
   name: "TerrysSchedule",
   data() {
     return {
+      // Button state managment
+      tdListActive: {
+        pc: true,
+        ps4: false,
+        xb1: false,
+        // switch: false,
+      },
+
+      // Tabs
       dbg: "My name is TerrysSchedule.vue",
       tab: null,
       text: "",
@@ -246,18 +333,12 @@ export default {
       centered: false,
       grow: true,
       vertical: false,
-      prevIcon: false,
-      nextIcon: false,
+      prevIcon: true,
+      nextIcon: true,
       right: false,
+      tabs: 7,
 
-      tabs: 4,
-
-      tdListActive: {
-        pc: true,
-        ps4: false,
-        xb1: false,
-        // switch: false,
-      },
+      // Envent schedules
       SelectedPlatform: "pc",
       updatedFetch: false,
       localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -298,7 +379,14 @@ export default {
       huntEidolonSchedule: {},
       orbVallisSchedule: {},
       cambionDriftSchedule: {},
+      WfData: {
+        pc: { lastUpdate: 0, data: {} },
+        ps4: { lastUpdate: 0, data: {} },
+        xb1: { lastUpdate: 0, data: {} },
+        // switch: { lastUpdate: 0, data: {} },
+      },
 
+      // Fissures
       // Apeal is function of the expexted time spent to open the relic.
       appealTable: {
         missionType: {
@@ -334,11 +422,18 @@ export default {
         },
       },
       fissures: {},
-      WfData: {
-        pc: { lastUpdate: 0, data: {} },
-        ps4: { lastUpdate: 0, data: {} },
-        xb1: { lastUpdate: 0, data: {} },
-        // switch: { lastUpdate: 0, data: {} },
+
+      // Bounties
+      bountiesDefinitions: {
+        ostrons: {
+          table: {},
+        },
+        solarisUnited: {
+          table: {},
+        },
+        entrati: {
+          table: {},
+        },
       },
     };
   },
@@ -424,8 +519,8 @@ export default {
         idx: 0,
         mode: objDataSrc[objDef.stateEntryName],
         modeMgmt: objDef.modeMgmt,
-        lastStartTuple: { month: 0, day: 0 },
-        lastEndTuple: { month: 0, day: 0 },
+        lastStartTuple: { month: 1000, day: 1000 },
+        lastEndTuple: { month: 1000, day: 1000 },
         startMonthTrack: true,
         startDayTrack: true,
         endMonthTrack: true,
@@ -499,6 +594,29 @@ export default {
       }
     },
 
+    async computeBounties(objDef) {
+      let idx = 0;
+      let t = {};
+      for (let j in objDef.jobs) {
+        let standingStages = 0;
+        for (let s in objDef.jobs[j].standingStages) {
+          standingStages += objDef.jobs[j].standingStages[s];
+        }
+
+        t[idx] = {
+          id: idx,
+          type: objDef.jobs[j].type,
+          enemyLevels:
+            objDef.jobs[j].enemyLevels[0] +
+            " - " +
+            objDef.jobs[j].enemyLevels[1],
+          standingStages: standingStages,
+        };
+        idx++;
+      }
+      objDef.table = t;
+    },
+
     async setPlatformAndRefresh(val) {
       this.SelectedPlatform = val;
       for (let elm in this.tdListActive) {
@@ -532,10 +650,32 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+
+        // We supposed to have an object now
+        // We still have to find some specific entries as they are 'thrown in the bucket like that'
+        // We link those jobs section for conveninence
+        let sm = this.WfData[val].data.syndicateMissions;
+        let compTable = {
+          0: { name: "Ostrons", target: "ostrons" },
+          1: { name: "EntratiSyndicate", target: "entrati" },
+          2: { name: "Solaris United", target: "solarisUnited" },
+        };
+        for (let elm in sm) {
+          for (let c in compTable) {
+            if (sm[elm].syndicate == compTable[c].name) {
+              this.bountiesDefinitions[compTable[c].target].jobs = sm[elm].jobs;
+            }
+          }
+        }
+
+        // Now we're talking
         await this.computeEvents(this.PlanetEventDefinitions.cetus);
         await this.computeEvents(this.PlanetEventDefinitions.orbVallis);
         await this.computeEvents(this.PlanetEventDefinitions.cambionDrift);
         await this.computeFissures();
+        await this.computeBounties(this.bountiesDefinitions.ostrons);
+        await this.computeBounties(this.bountiesDefinitions.solarisUnited);
+        await this.computeBounties(this.bountiesDefinitions.entrati);
         this.WfData[val].lastUpdate = Date.now();
         this.updatedFetch = true;
       }

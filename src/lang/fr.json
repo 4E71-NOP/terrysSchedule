@@ -15,7 +15,10 @@
 			"1": "Plaines d'Eidolon",
 			"2": "Vallée d'Orbis",
 			"3": "Puy de Cambion",
-			"4": "Fissures"
+			"4": "Fissures",
+			"5": "Primes Ostron",
+			"6": "Primes Solaris",
+			"7": "Primes Entrati"
 		},
 		"p01": "Organisons nous!",
 		"tbl01Caption": "Plateforme",
@@ -47,6 +50,24 @@
 					"vome": "Vome",
 					"fass": "Fass"
 				}
+			},
+			"ostronsBounties": {
+				"caption": "",
+				"c1": "Type",
+				"c2": "Récompence",
+				"c3": "Niveau des ennemis"
+			},
+			"solarisBounties": {
+				"caption": "",
+				"c1": "Type",
+				"c2": "Récompence",
+				"c3": "Niveau des ennemis"
+			},
+			"entratiBounties": {
+				"caption": "",
+				"c1": "Type",
+				"c2": "Récompence",
+				"c3": "Niveau des ennemis"
 			}
 		},
 		"waiting": "Pendant qu'on attend...",

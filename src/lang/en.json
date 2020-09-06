@@ -15,7 +15,10 @@
 			"1": "Eidolon plains",
 			"2": "Orb Vallis",
 			"3": "Cambion drift",
-			"4": "Fissures"
+			"4": "Fissures",
+			"5": "Ostron bounties",
+			"6": "Solaris bounties",
+			"7": "Entrati bounties"
 		},
 		"p01": "Lets organize!",
 		"tbl01Caption": "Plateform",
@@ -47,6 +50,24 @@
 					"vome": "Vome",
 					"fass": "Fass"
 				}
+			},
+			"ostronsBounties": {
+				"caption": "",
+				"c1": "Type",
+				"c2": "Reward",
+				"c3": "Enemies level"
+			},
+			"solarisBounties": {
+				"caption": "",
+				"c1": "Type",
+				"c2": "Reward",
+				"c3": "Enemies level"
+			},
+			"entratiBounties": {
+				"caption": "",
+				"c1": "Type",
+				"c2": "Reward",
+				"c3": "Enemies level"
 			}
 		},
 		"waiting": "While we wait...",
