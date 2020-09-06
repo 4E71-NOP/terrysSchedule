@@ -52,19 +52,19 @@
 				}
 			},
 			"ostronsBounties": {
-				"caption": "",
+				"caption": "Mises à prix des Ostrons",
 				"c1": "Type",
 				"c2": "Récompence",
 				"c3": "Niveau des ennemis"
 			},
 			"solarisBounties": {
-				"caption": "",
+				"caption": "Mises à prix d'Union Solaris",
 				"c1": "Type",
 				"c2": "Récompence",
 				"c3": "Niveau des ennemis"
 			},
 			"entratiBounties": {
-				"caption": "",
+				"caption": "Mises à prix des Entratis",
 				"c1": "Type",
 				"c2": "Récompence",
 				"c3": "Niveau des ennemis"

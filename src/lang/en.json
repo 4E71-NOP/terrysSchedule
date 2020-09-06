@@ -52,19 +52,19 @@
 				}
 			},
 			"ostronsBounties": {
-				"caption": "",
+				"caption": "Ostrons bounties",
 				"c1": "Type",
 				"c2": "Reward",
 				"c3": "Enemies level"
 			},
 			"solarisBounties": {
-				"caption": "",
+				"caption": "Solaris United bounties",
 				"c1": "Type",
 				"c2": "Reward",
 				"c3": "Enemies level"
 			},
 			"entratiBounties": {
-				"caption": "",
+				"caption": "Entrati bounties",
 				"c1": "Type",
 				"c2": "Reward",
 				"c3": "Enemies level"
