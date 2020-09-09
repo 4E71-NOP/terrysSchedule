@@ -527,11 +527,21 @@ export default {
         endDayTrack: true,
       };
 
-      let huntStartComp = d.modeMgmt == "cambionDrift" ? "vome" : true;
-      let huntStart =
-        objDataSrc[objDef.stateEntryName] == huntStartComp
-          ? new Date(objDataSrc.expiry).getTime()
-          : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp as starting point
+      let huntStart = null;
+      switch (objDef.planetEntry) {
+        case "cetusCycle":
+          huntStart =
+            objDataSrc[objDef.stateEntryName] == true
+              ? new Date(objDataSrc.expiry).getTime()
+              : new Date(objDataSrc.activation).getTime(); // Depending on the day/night state we take expiry or activation timestamp as starting point
+          break;
+        case "vallisCycle":
+          huntStart = new Date(objDataSrc.activation).getTime();
+          break;
+        case "cambionCycle":
+          huntStart = new Date(objDataSrc.activation).getTime();
+          break;
+      }
 
       for (let n = 0; n < objDef.nbrLines; n++) {
         let s = new Date(huntStart);
