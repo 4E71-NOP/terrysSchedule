@@ -15,10 +15,11 @@
 			"1": "Eidolon plains",
 			"2": "Orb Vallis",
 			"3": "Cambion drift",
-			"4": "Fissures",
-			"5": "Ostron bounties",
-			"6": "Solaris bounties",
-			"7": "Entrati bounties"
+			"4": "Sortie",
+			"5": "Fissures",
+			"6": "Ostron bounties",
+			"7": "Solaris bounties",
+			"8": "Entrati bounties"
 		},
 		"p01": "Lets organize!",
 		"tbl01Caption": "Plateform",
@@ -69,6 +70,13 @@
 				"c2": "Reward",
 				"c3": "Enemies level"
 			}
+		},
+		"sortieTbl":{
+			"caption": "Sortie",
+			"c1":"N°",
+			"c2":"Mission type",
+			"c3":"Modification",
+			"c4":"Modifier details"
 		},
 		"waiting": "While we wait...",
 		"fissuresTbl": {

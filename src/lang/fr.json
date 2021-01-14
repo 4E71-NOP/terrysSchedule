@@ -15,10 +15,11 @@
 			"1": "Plaines d'Eidolon",
 			"2": "Vallée d'Orbis",
 			"3": "Puy de Cambion",
-			"4": "Fissures",
-			"5": "Primes Ostron",
-			"6": "Primes Solaris",
-			"7": "Primes Entrati"
+			"4": "Sortie",
+			"5": "Fissures",
+			"6": "Primes Ostron",
+			"7": "Primes Solaris",
+			"8": "Primes Entrati"
 		},
 		"p01": "Organisons nous!",
 		"tbl01Caption": "Plateforme",
@@ -69,6 +70,13 @@
 				"c2": "Récompence",
 				"c3": "Niveau des ennemis"
 			}
+		},
+		"sortieTbl":{
+			"caption": "Sortie",
+			"c1":"N°",
+			"c2":"Type de mission",
+			"c3":"Modification",
+			"c4":"Détails des modifications"
 		},
 		"waiting": "Pendant qu'on attend...",
 		"fissuresTbl": {

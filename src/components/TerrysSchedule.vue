@@ -1,29 +1,45 @@
 <template>
   <div id="terrrySchedule" class="RouterViewBlock">
-    <h3>{{ $t('Ts.p01') }}</h3>
+    <h3>{{ $t("Ts.p01") }}</h3>
     <table class="tblSelectionPlatform">
-      <caption>{{$t('Ts.tbl01Caption')}}</caption>
+      <caption>
+        {{
+          $t("Ts.tbl01Caption")
+        }}
+      </caption>
       <tr>
         <td
           class="tblSelectionPlatformTd"
-          v-bind:class="{tblSelectionPlatformTdActive: tdListActive.pc}"
+          v-bind:class="{ tblSelectionPlatformTdActive: tdListActive.pc }"
           @click="setPlatformAndRefresh('pc')"
         >
-          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fab', 'windows']"></font-awesome-icon>PC
+          <font-awesome-icon
+            class="fa-2x iconPlatform"
+            :icon="['fab', 'windows']"
+          ></font-awesome-icon
+          >PC
         </td>
         <td
           class="tblSelectionPlatformTd"
-          v-bind:class="{tblSelectionPlatformTdActive: tdListActive.ps4}"
+          v-bind:class="{ tblSelectionPlatformTdActive: tdListActive.ps4 }"
           @click="setPlatformAndRefresh('ps4')"
         >
-          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fab', 'playstation']"></font-awesome-icon>PS4
+          <font-awesome-icon
+            class="fa-2x iconPlatform"
+            :icon="['fab', 'playstation']"
+          ></font-awesome-icon
+          >PS4
         </td>
         <td
           class="tblSelectionPlatformTd"
-          v-bind:class="{tblSelectionPlatformTdActive: tdListActive.xb1}"
+          v-bind:class="{ tblSelectionPlatformTdActive: tdListActive.xb1 }"
           @click="setPlatformAndRefresh('xb1')"
         >
-          <font-awesome-icon class="fa-2x iconPlatform" :icon="['fab', 'xbox']"></font-awesome-icon>Xbox One
+          <font-awesome-icon
+            class="fa-2x iconPlatform"
+            :icon="['fab', 'xbox']"
+          ></font-awesome-icon
+          >Xbox One
         </td>
         <!-- <td
           class="tblSelectionPlatformTd"
@@ -36,13 +52,13 @@
     </table>
     <br />
     <br />
-    <div v-if="updatedFetch===true && WfData[SelectedPlatform].lastUpdate">
+    <div v-if="updatedFetch === true && WfData[SelectedPlatform].lastUpdate">
       <p>
-        {{$t("Ts.p02")}}
+        {{ $t("Ts.p02") }}
         <br />
-        {{$t("Ts.p03")}} {{ localTimezone }}
+        {{ $t("Ts.p03") }} {{ localTimezone }}
         <br />
-        {{$t("Ts.p04")}} {{ apiDataUpdate }}
+        {{ $t("Ts.p04") }} {{ apiDataUpdate }}
       </p>
 
       <!-- -->
@@ -62,160 +78,239 @@
         <v-tabs-slider></v-tabs-slider>
 
         <v-tab v-for="i in tabs" :key="i" :href="`#tab-${i}`">
-          {{$t('Ts.Tabs.'+i)}}
+          {{ $t("Ts.Tabs." + i) }}
           <v-icon v-if="icons">mdi-phone</v-icon>
         </v-tab>
 
         <!-- 
-		--------------------------------------------------------------------------------
-		Eidolon 
+        --------------------------------------------------------------------------------
+        Eidolon 
         -->
         <v-tab-item value="tab-1">
           <table class="tblEvents">
-            <caption>{{$t("Ts.eventTbl.cetus.caption") }}</caption>
+            <caption>
+              {{
+                $t("Ts.eventTbl.cetus.caption")
+              }}
+            </caption>
             <thead>
               <tr>
-                <td colspan="3">{{$t("Ts.eventTbl.cetus.c1")}}</td>
-                <td colspan="3">{{$t("Ts.eventTbl.cetus.c2")}}</td>
+                <td colspan="3">{{ $t("Ts.eventTbl.cetus.c1") }}</td>
+                <td colspan="3">{{ $t("Ts.eventTbl.cetus.c2") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in huntEidolonSchedule"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.even}"
+                v-bind:class="{ tblEventsTrShift: el.even }"
               >
                 <td
-                  v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
-                >{{$t("month."+el.start.month)}}</td>
-                <td
-                  v-bind:class="{tblEventsTdDayShift: el.start.dayClass}"
-                >{{$t("day."+el.start.day)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-                <td
-                  v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
-                >{{$t("month."+el.end.month)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+                  v-bind:class="{ tblEventsTdMonthShift: el.start.monthClass }"
+                >
+                  {{ $t("month." + el.start.month) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.start.dayClass }">
+                  {{ $t("day." + el.start.day) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.start.dayClass }">
+                  {{ el.start.hour }}
+                </td>
+                <td v-bind:class="{ tblEventsTdMonthShift: el.end.monthClass }">
+                  {{ $t("month." + el.end.month) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.end.dayClass }">
+                  {{ $t("day." + el.end.day) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.end.dayClass }">
+                  {{ el.end.hour }}
+                </td>
               </tr>
             </tbody>
           </table>
           <br />
         </v-tab-item>
         <!-- 
-		--------------------------------------------------------------------------------
-		Orbis valley 
+        --------------------------------------------------------------------------------
+        Orbis valley 
         -->
         <v-tab-item value="tab-2">
           <table class="tblEvents">
-            <caption>{{$t("Ts.eventTbl.orbVallis.caption") }}</caption>
+            <caption>
+              {{
+                $t("Ts.eventTbl.orbVallis.caption")
+              }}
+            </caption>
             <thead>
               <tr>
-                <td>{{$t("Ts.eventTbl.orbVallis.c1")}}</td>
-                <td colspan="3">{{$t("Ts.eventTbl.orbVallis.c2")}}</td>
-                <td colspan="3">{{$t("Ts.eventTbl.orbVallis.c3")}}</td>
+                <td>{{ $t("Ts.eventTbl.orbVallis.c1") }}</td>
+                <td colspan="3">{{ $t("Ts.eventTbl.orbVallis.c2") }}</td>
+                <td colspan="3">{{ $t("Ts.eventTbl.orbVallis.c3") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in orbVallisSchedule"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.even}"
+                v-bind:class="{ tblEventsTrShift: el.even }"
               >
-                <td>{{$t('Ts.eventTbl.orbVallis.type.'+el.start.type)}}</td>
+                <td>{{ $t("Ts.eventTbl.orbVallis.type." + el.start.type) }}</td>
                 <td
-                  v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
-                >{{$t("month."+el.start.month)}}</td>
-                <td
-                  v-bind:class="{tblEventsTdDayShift: el.start.dayClass}"
-                >{{$t("day."+el.start.day)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-                <td
-                  v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
-                >{{$t("month."+el.end.month)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+                  v-bind:class="{ tblEventsTdMonthShift: el.start.monthClass }"
+                >
+                  {{ $t("month." + el.start.month) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.start.dayClass }">
+                  {{ $t("day." + el.start.day) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.start.dayClass }">
+                  {{ el.start.hour }}
+                </td>
+                <td v-bind:class="{ tblEventsTdMonthShift: el.end.monthClass }">
+                  {{ $t("month." + el.end.month) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.end.dayClass }">
+                  {{ $t("day." + el.end.day) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.end.dayClass }">
+                  {{ el.end.hour }}
+                </td>
               </tr>
             </tbody>
           </table>
           <br />
         </v-tab-item>
         <!-- 
-		--------------------------------------------------------------------------------
-		Cambion drift
+        --------------------------------------------------------------------------------
+        Cambion drift
         -->
         <v-tab-item value="tab-3">
           <table class="tblEvents">
-            <caption>{{$t("Ts.eventTbl.cambionDrift.caption") }}</caption>
+            <caption>
+              {{
+                $t("Ts.eventTbl.cambionDrift.caption")
+              }}
+            </caption>
             <thead>
               <tr>
-                <td>{{$t("Ts.eventTbl.cambionDrift.c1")}}</td>
-                <td colspan="3">{{$t("Ts.eventTbl.cambionDrift.c2")}}</td>
-                <td colspan="3">{{$t("Ts.eventTbl.cambionDrift.c3")}}</td>
+                <td>{{ $t("Ts.eventTbl.cambionDrift.c1") }}</td>
+                <td colspan="3">{{ $t("Ts.eventTbl.cambionDrift.c2") }}</td>
+                <td colspan="3">{{ $t("Ts.eventTbl.cambionDrift.c3") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in cambionDriftSchedule"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.even}"
+                v-bind:class="{ tblEventsTrShift: el.even }"
               >
-                <td>{{$t("Ts.eventTbl.cambionDrift.type."+el.start.type)}}</td>
+                <td>
+                  {{ $t("Ts.eventTbl.cambionDrift.type." + el.start.type) }}
+                </td>
                 <td
-                  v-bind:class="{tblEventsTdMonthShift: el.start.monthClass}"
-                >{{$t("month."+el.start.month)}}</td>
-                <td
-                  v-bind:class="{tblEventsTdDayShift: el.start.dayClass}"
-                >{{$t("day."+el.start.day)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.start.dayClass}">{{el.start.hour}}</td>
-                <td
-                  v-bind:class="{tblEventsTdMonthShift: el.end.monthClass}"
-                >{{$t("month."+el.end.month)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{$t("day."+el.end.day)}}</td>
-                <td v-bind:class="{tblEventsTdDayShift: el.end.dayClass}">{{el.end.hour}}</td>
+                  v-bind:class="{ tblEventsTdMonthShift: el.start.monthClass }"
+                >
+                  {{ $t("month." + el.start.month) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.start.dayClass }">
+                  {{ $t("day." + el.start.day) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.start.dayClass }">
+                  {{ el.start.hour }}
+                </td>
+                <td v-bind:class="{ tblEventsTdMonthShift: el.end.monthClass }">
+                  {{ $t("month." + el.end.month) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.end.dayClass }">
+                  {{ $t("day." + el.end.day) }}
+                </td>
+                <td v-bind:class="{ tblEventsTdDayShift: el.end.dayClass }">
+                  {{ el.end.hour }}
+                </td>
               </tr>
             </tbody>
           </table>
           <br />
         </v-tab-item>
         <!-- 
-		--------------------------------------------------------------------------------
-		Fissures 
+        --------------------------------------------------------------------------------
+        Sortie 
         -->
         <v-tab-item value="tab-4">
-          {{$t("Ts.waiting")}}
-          <br />
-
-          <table class="tblFissures">
-            <caption>{{$t("Ts.fissuresTbl.caption")}}</caption>
+          <table class="tblSortie">
+            <caption>
+              {{ $t("Ts.sortieTbl.caption") }} <br>
+              Boss : {{this.sortieContext.boss}} <br>
+              Faction : {{this.sortieContext.faction}} <br>
+            </caption>
             <thead>
               <tr>
                 <!-- <td>id</td> -->
-                <td>{{$t("Ts.fissuresTbl.c1")}}</td>
-                <td>{{$t("Ts.fissuresTbl.c2")}}</td>
-                <td>{{$t("Ts.fissuresTbl.c3")}}</td>
-                <td>{{$t("Ts.fissuresTbl.c4")}}</td>
-                <td class="tblFissuresTdRight">{{$t("Ts.fissuresTbl.c5")}}</td>
-                <td>{{$t("Ts.fissuresTbl.c6")}}</td>
-                <td>{{$t("Ts.fissuresTbl.c7")}}</td>
+                <td>{{ $t("Ts.sortieTbl.c1") }}</td>
+                <td>{{ $t("Ts.sortieTbl.c2") }}</td>
+                <td>{{ $t("Ts.sortieTbl.c3") }}</td>
+                <td>{{ $t("Ts.sortieTbl.c4") }}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in this.sortie"
+                :key="el.idx"
+              >
+                <td>{{ el.idx }}</td>
+                <td>{{ el.missionType }}</td>
+                <td>{{ el.modifier }}</td>
+                <td>{{ el.modifierDescription }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        </v-tab-item>
+
+        <!-- 
+        --------------------------------------------------------------------------------
+        Fissures 
+        -->
+        <v-tab-item value="tab-5">
+          {{ $t("Ts.waiting") }}
+          <br />
+
+          <table class="tblFissures">
+            <caption>
+              {{
+                $t("Ts.fissuresTbl.caption")
+              }}
+            </caption>
+            <thead>
+              <tr>
+                <!-- <td>id</td> -->
+                <td>{{ $t("Ts.fissuresTbl.c1") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c2") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c3") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c4") }}</td>
+                <td class="tblFissuresTdRight">
+                  {{ $t("Ts.fissuresTbl.c5") }}
+                </td>
+                <td>{{ $t("Ts.fissuresTbl.c6") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c7") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in orderedFissures"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.appeal}"
+                v-bind:class="{ tblEventsTrShift: el.appeal }"
               >
                 <!-- <td>{{el.id}}</td> -->
-                <td>{{el.appeal}}</td>
-                <td>{{$t("Ts.fissuresTbl.missionType."+el.type)}}</td>
-                <td>{{el.tier}}</td>
-                <td>{{el.enemy}}</td>
+                <td>{{ el.appeal }}</td>
+                <td>{{ $t("Ts.fissuresTbl.missionType." + el.type) }}</td>
+                <td>{{ el.tier }}</td>
+                <td>{{ el.enemy }}</td>
                 <td class="tblFissuresTdRight">
                   <Timer :targetDate="el.targetDate" />
                 </td>
-                <td>{{el.endTime}}</td>
-                <td>{{el.node}}</td>
+                <td>{{ el.endTime }}</td>
+                <td>{{ el.node }}</td>
               </tr>
             </tbody>
           </table>
@@ -224,25 +319,29 @@
         <!-- --------------------------------------------------------------------------------
         Bounties Ostrons
         -->
-        <v-tab-item value="tab-5">
+        <v-tab-item value="tab-6">
           <table class="tblEvents">
-            <caption>{{$t("Ts.eventTbl.ostronsBounties.caption") }}</caption>
+            <caption>
+              {{
+                $t("Ts.eventTbl.ostronsBounties.caption")
+              }}
+            </caption>
             <thead>
               <tr>
-                <td>{{$t("Ts.eventTbl.ostronsBounties.c1")}}</td>
-                <td>{{$t("Ts.eventTbl.ostronsBounties.c2")}}</td>
-                <td>{{$t("Ts.eventTbl.ostronsBounties.c3")}}</td>
+                <td>{{ $t("Ts.eventTbl.ostronsBounties.c1") }}</td>
+                <td>{{ $t("Ts.eventTbl.ostronsBounties.c2") }}</td>
+                <td>{{ $t("Ts.eventTbl.ostronsBounties.c3") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in bountiesDefinitions.ostrons.table"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.even}"
+                v-bind:class="{ tblEventsTrShift: el.even }"
               >
-                <td>{{el.type}}</td>
-                <td>{{el.standingStages}}</td>
-                <td>{{el.enemyLevels}}</td>
+                <td>{{ el.type }}</td>
+                <td>{{ el.standingStages }}</td>
+                <td>{{ el.enemyLevels }}</td>
               </tr>
             </tbody>
           </table>
@@ -250,25 +349,29 @@
         <!-- --------------------------------------------------------------------------------
         Bounties Solaris
         -->
-        <v-tab-item value="tab-6">
+        <v-tab-item value="tab-7">
           <table class="tblEvents">
-            <caption>{{$t("Ts.eventTbl.solarisBounties.caption") }}</caption>
+            <caption>
+              {{
+                $t("Ts.eventTbl.solarisBounties.caption")
+              }}
+            </caption>
             <thead>
               <tr>
-                <td>{{$t("Ts.eventTbl.solarisBounties.c1")}}</td>
-                <td>{{$t("Ts.eventTbl.solarisBounties.c2")}}</td>
-                <td>{{$t("Ts.eventTbl.solarisBounties.c3")}}</td>
+                <td>{{ $t("Ts.eventTbl.solarisBounties.c1") }}</td>
+                <td>{{ $t("Ts.eventTbl.solarisBounties.c2") }}</td>
+                <td>{{ $t("Ts.eventTbl.solarisBounties.c3") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in bountiesDefinitions.solarisUnited.table"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.even}"
+                v-bind:class="{ tblEventsTrShift: el.even }"
               >
-                <td>{{el.type}}</td>
-                <td>{{el.standingStages}}</td>
-                <td>{{el.enemyLevels}}</td>
+                <td>{{ el.type }}</td>
+                <td>{{ el.standingStages }}</td>
+                <td>{{ el.enemyLevels }}</td>
               </tr>
             </tbody>
           </table>
@@ -276,25 +379,29 @@
         <!-- --------------------------------------------------------------------------------
         Bounties Entrati
         -->
-        <v-tab-item value="tab-7">
+        <v-tab-item value="tab-8">
           <table class="tblEvents">
-            <caption>{{$t("Ts.eventTbl.entratiBounties.caption") }}</caption>
+            <caption>
+              {{
+                $t("Ts.eventTbl.entratiBounties.caption")
+              }}
+            </caption>
             <thead>
               <tr>
-                <td>{{$t("Ts.eventTbl.entratiBounties.c1")}}</td>
-                <td>{{$t("Ts.eventTbl.entratiBounties.c2")}}</td>
-                <td>{{$t("Ts.eventTbl.entratiBounties.c3")}}</td>
+                <td>{{ $t("Ts.eventTbl.entratiBounties.c1") }}</td>
+                <td>{{ $t("Ts.eventTbl.entratiBounties.c2") }}</td>
+                <td>{{ $t("Ts.eventTbl.entratiBounties.c3") }}</td>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="el in bountiesDefinitions.entrati.table"
                 :key="el.id"
-                v-bind:class="{tblEventsTrShift: el.even}"
+                v-bind:class="{ tblEventsTrShift: el.even }"
               >
-                <td>{{el.type}}</td>
-                <td>{{el.standingStages}}</td>
-                <td>{{el.enemyLevels}}</td>
+                <td>{{ el.type }}</td>
+                <td>{{ el.standingStages }}</td>
+                <td>{{ el.enemyLevels }}</td>
               </tr>
             </tbody>
           </table>
@@ -336,7 +443,7 @@ export default {
       prevIcon: true,
       nextIcon: true,
       right: false,
-      tabs: 7,
+      tabs: 8,
 
       // Envent schedules
       SelectedPlatform: "pc",
@@ -421,6 +528,8 @@ export default {
           Requiem: 0.8,
         },
       },
+      sortieContext:{},
+      sortie: {},
       fissures: {},
 
       // Bounties
@@ -571,6 +680,27 @@ export default {
       }
     },
 
+    async computeSortie() {
+      let src = this.WfData[this.SelectedPlatform].data.sortie.variants;
+      this.sortie = {};
+      let dst = this.sortie;
+      let dstIdx = 1;
+      for (let elm in src) {
+        dst[dstIdx] = {
+            "idx" : dstIdx,
+            "missionType" : src[elm].missionType,
+            "modifier" : src[elm].modifier,
+            "modifierDescription" : src[elm].modifierDescription
+        }
+        dstIdx++;
+      }
+      let ctxt = this.WfData[this.SelectedPlatform].data.sortie;
+      this.sortieContext = {
+          "boss": ctxt.boss,
+          "faction": ctxt.faction,
+      }
+    },
+
     async computeFissures() {
       let src = this.WfData[this.SelectedPlatform].data.fissures;
       this.fissures = {};
@@ -667,7 +797,7 @@ export default {
         let sm = this.WfData[val].data.syndicateMissions;
         let compTable = {
           0: { name: "Ostrons", target: "ostrons" },
-          1: { name: "EntratiSyndicate", target: "entrati" },
+          1: { name: "Entrati", target: "entrati" },
           2: { name: "Solaris United", target: "solarisUnited" },
         };
         for (let elm in sm) {
@@ -682,6 +812,7 @@ export default {
         await this.computeEvents(this.PlanetEventDefinitions.cetus);
         await this.computeEvents(this.PlanetEventDefinitions.orbVallis);
         await this.computeEvents(this.PlanetEventDefinitions.cambionDrift);
+        await this.computeSortie();
         await this.computeFissures();
         await this.computeBounties(this.bountiesDefinitions.ostrons);
         await this.computeBounties(this.bountiesDefinitions.solarisUnited);

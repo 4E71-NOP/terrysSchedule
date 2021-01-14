@@ -175,6 +175,48 @@
 	margin-right: 10px;
 }
 
+
+/* Sortie */
+.tblSortie {
+	width: 80%;
+	margin: auto;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #00000040;
+	border-spacing: 0px;
+	background-color: #00000010;
+	text-align: center;
+	font-size: small;
+
+}
+
+.tblSortie>caption {
+	font-size: large;
+	font-weight: bold;
+	text-align: left;
+	background-color: #00000010;
+	padding: 10px;
+}
+
+.tblSortie>thead {
+	background-color: #FFC00040;
+}
+
+.tblSortie>thead>tr>td {
+	border-bottom: 2px solid black;
+}
+
+.tblSortie>tbody>tr:hover {
+	background-color: #00004080;
+	color: #FFFFFF;
+}
+
+.tblSortieTdRight {
+	text-align: right;
+}
+
+
+/* Fissures */
 .tblFissures {
 	width: 80%;
 	margin: auto;
@@ -210,6 +252,7 @@
 .tblFissuresTdRight {
 	text-align: right;
 }
+
 
 /* Component Timer */
 
