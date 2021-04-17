@@ -239,9 +239,20 @@
         <v-tab-item value="tab-4">
           <table class="tblSortie">
             <caption>
-              {{ $t("Ts.sortieTbl.caption") }} <br>
-              Boss : {{this.sortieContext.boss}} <br>
-              Faction : {{this.sortieContext.faction}} <br>
+              {{
+                $t("Ts.sortieTbl.caption")
+              }}
+              <br />
+              Boss :
+              {{
+                this.sortieContext.boss
+              }}
+              <br />
+              Faction :
+              {{
+                this.sortieContext.faction
+              }}
+              <br />
             </caption>
             <thead>
               <tr>
@@ -253,10 +264,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="el in this.sortie"
-                :key="el.idx"
-              >
+              <tr v-for="el in this.sortie" :key="el.idx">
                 <td>{{ el.idx }}</td>
                 <td>{{ el.missionType }}</td>
                 <td>{{ el.modifier }}</td>
@@ -305,7 +313,7 @@
                 <td>{{ el.appeal }}</td>
                 <td>{{ $t("Ts.fissuresTbl.missionType." + el.type) }}</td>
                 <td>{{ el.tier }}</td>
-                <td>{{ el.enemy }}</td>
+                <td>{{ $t("Ts.fissuresTbl.enemy." + el.enemy) }}</td>
                 <td class="tblFissuresTdRight">
                   <Timer :targetDate="el.targetDate" />
                 </td>
@@ -512,11 +520,17 @@ export default {
           Assault: 1,
           Hijack: 1,
           Interception: 1,
+          Volatile: 3,
+          Skirmish: 3,
+          CrewBattleNode519: 3,
+          CrewBattleNode533: 3,
         },
         enemy: {
           Infested: 1.2,
           Corpus: 1.1,
           Crossfire: 1,
+          CrewBattleNode519: 1,
+          CrewBattleNode533: 1,
           Orokin: 0.9,
           Grineer: 0.8,
         },
@@ -528,7 +542,7 @@ export default {
           Requiem: 0.8,
         },
       },
-      sortieContext:{},
+      sortieContext: {},
       sortie: {},
       fissures: {},
 
@@ -687,18 +701,18 @@ export default {
       let dstIdx = 1;
       for (let elm in src) {
         dst[dstIdx] = {
-            "idx" : dstIdx,
-            "missionType" : src[elm].missionType,
-            "modifier" : src[elm].modifier,
-            "modifierDescription" : src[elm].modifierDescription
-        }
+          idx: dstIdx,
+          missionType: src[elm].missionType,
+          modifier: src[elm].modifier,
+          modifierDescription: src[elm].modifierDescription,
+        };
         dstIdx++;
       }
       let ctxt = this.WfData[this.SelectedPlatform].data.sortie;
       this.sortieContext = {
-          "boss": ctxt.boss,
-          "faction": ctxt.faction,
-      }
+        boss: ctxt.boss,
+        faction: ctxt.faction,
+      };
     },
 
     async computeFissures() {
@@ -709,6 +723,20 @@ export default {
       for (let elm in src) {
         let dateExpiry = new Date(src[elm].expiry);
         if (src[elm].active == true && dateExpiry > Date.now()) {
+          // console.log(
+          //   "Scores ; missionType=" +
+          //     this.appealTable.missionType[src[elm].missionType] +
+          //     "; enemy=" +
+          //     this.appealTable.enemy[src[elm].enemy] +
+          //     "; Tier=" +
+          //     this.appealTable.tier[src[elm].tier]+
+          //     "; ref="+
+          //     src[elm].missionType+
+          //     "-"+
+          //     src[elm].tier+
+          //     "-"+
+          //     src[elm].enemy
+          // );
           dst[dstIdx] = {
             id: dstIdx,
             // appeal: this.appealTable[src[elm].missionType],

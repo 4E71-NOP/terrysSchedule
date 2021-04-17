@@ -101,7 +101,19 @@
 				"Rescue": "Sauvetage",
 				"Sabotage": "Sabotage",
 				"Spy": "Espionnage",
-				"Survival": "Survie"
+				"Survival": "Survie",
+				"Volatile": "Néant - Volatile",
+				"Skirmish":"Néant - Escarmouche",
+				"CrewBattleNode519":"Néant - Extermination",
+				"CrewBattleNode533":"Néant - Escarmouche"
+			},
+			"enemy":{
+				"Corpus":"Corpus",
+				"Grineer":"Grineer",
+				"Orokin":"Orokin",
+				"Infested":"Infesté",
+				"CrewBattleNode519":"Corpus(Néant)",
+				"CrewBattleNode533":"Grineer(Néant)"
 			},
 			"expired": "Expirée"
 		}

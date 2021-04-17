@@ -101,7 +101,19 @@
 				"Rescue": "Rescue",
 				"Sabotage": "Sabotage",
 				"Spy": "Spy",
-				"Survival": "Survival"
+				"Survival": "Survival",
+				"Volatile": "Void - Volatil",
+				"Skirmish":"Void - Skirmish",
+				"CrewBattleNode519":"Void - Extermination",
+				"CrewBattleNode533":"Void - Skirmish"
+			},
+			"enemy":{
+				"Corpus":"Corpus",
+				"Grineer":"Grineer",
+				"Orokin":"Orokin",
+				"Infested":"Infested",
+				"CrewBattleNode519":"Corpus(Void)",
+				"CrewBattleNode533":"Grineer(Void)"
 			},
 			"expired": "Expired"
 		}
