@@ -80,7 +80,8 @@
 		},
 		"waiting": "While we wait...",
 		"fissuresTbl": {
-			"caption": "Relic missions",
+			"captionNormal": "Regular relic missions",
+			"captionVoid": "Void relic missions",
 			"c1": "Appeal",
 			"c2": "Mission",
 			"c3": "Relic",

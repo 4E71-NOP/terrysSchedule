@@ -286,7 +286,7 @@
           <table class="tblFissures">
             <caption>
               {{
-                $t("Ts.fissuresTbl.caption")
+                $t("Ts.fissuresTbl.captionNormal")
               }}
             </caption>
             <thead>
@@ -305,7 +305,7 @@
             </thead>
             <tbody>
               <tr
-                v-for="el in orderedFissures"
+                v-for="el in orderedFissuresNormal"
                 :key="el.id"
                 v-bind:class="{ tblEventsTrShift: el.appeal }"
               >
@@ -322,6 +322,52 @@
               </tr>
             </tbody>
           </table>
+          <br>
+
+          <table class="tblFissures">
+            <caption>
+              {{
+                $t("Ts.fissuresTbl.captionVoid")
+              }}
+            </caption>
+            <thead>
+              <tr>
+                <!-- <td>id</td> -->
+                <td>{{ $t("Ts.fissuresTbl.c1") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c2") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c3") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c4") }}</td>
+                <td class="tblFissuresTdRight">
+                  {{ $t("Ts.fissuresTbl.c5") }}
+                </td>
+                <td>{{ $t("Ts.fissuresTbl.c6") }}</td>
+                <td>{{ $t("Ts.fissuresTbl.c7") }}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="el in orderedFissuresVoid"
+                :key="el.id"
+                v-bind:class="{ tblEventsTrShift: el.appeal }"
+              >
+                <!-- <td>{{el.id}}</td> -->
+                <td>{{ el.appeal }}</td>
+                <td>{{ $t("Ts.fissuresTbl.missionType." + el.type) }}</td>
+                <td>{{ el.tier }}</td>
+                <td>{{ $t("Ts.fissuresTbl.enemy." + el.enemy) }}</td>
+                <td class="tblFissuresTdRight">
+                  <Timer :targetDate="el.targetDate" />
+                </td>
+                <td>{{ el.endTime }}</td>
+                <td>{{ el.node }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+
+
           <br />
         </v-tab-item>
         <!-- --------------------------------------------------------------------------------
@@ -534,18 +580,19 @@ export default {
           Orokin: 0.9,
           Grineer: 0.8,
         },
+        // 1 lith, 2 Meso, 3 neo, 4 axi, 5 requiem
         tier: {
-          Lith: 1.2,
-          Meso: 1.1,
-          Neo: 1,
-          Axi: 0.9,
-          Requiem: 0.8,
+          1: 1.2,
+          2: 1.1,
+          3: 1,
+          4: 0.9,
+          5: 0.8,
         },
       },
       sortieContext: {},
       sortie: {},
-      fissures: {},
-
+      fissuresNormal: {},
+      fissuresVoid: {},
       // Bounties
       bountiesDefinitions: {
         ostrons: {
@@ -562,9 +609,16 @@ export default {
   },
   // Use of Lo(w)dash orderBy as the VueJs docs recommend it. Another dependency...
   computed: {
-    orderedFissures: function () {
+    orderedFissuresNormal: function () {
       return _.orderBy(
-        this.fissures,
+        this.fissuresNormal,
+        ["appeal", "tier", "type"],
+        ["desc", "asc", "asc"]
+      );
+    },
+    orderedFissuresVoid: function () {
+      return _.orderBy(
+        this.fissuresVoid,
         ["appeal", "tier", "type"],
         ["desc", "asc", "asc"]
       );
@@ -717,8 +771,10 @@ export default {
 
     async computeFissures() {
       let src = this.WfData[this.SelectedPlatform].data.fissures;
-      this.fissures = {};
-      let dst = this.fissures;
+      this.fissuresNormal = {};
+      this.fissuresVoid = {};
+      let dstN = this.fissuresNormal;
+      let dstV = this.fissuresVoid;
       let dstIdx = 0;
       for (let elm in src) {
         let dateExpiry = new Date(src[elm].expiry);
@@ -737,26 +793,29 @@ export default {
           //     "-"+
           //     src[elm].enemy
           // );
-          dst[dstIdx] = {
+          this.fissuresTmp = {
+            realm : src[elm].isStorm,
             id: dstIdx,
             // appeal: this.appealTable[src[elm].missionType],
             appeal:
               Math.round(
-                this.appealTable.missionType[src[elm].missionType] *
-                  this.appealTable.enemy[src[elm].enemy] *
-                  this.appealTable.tier[src[elm].tier] *
+                this.appealTable.missionType[src[elm].missionKey] *
+                  this.appealTable.enemy[src[elm].enemyKey] *
+                  this.appealTable.tier[src[elm].tierNum] *
                   100
               ) / 100,
-            tier: src[elm].tier,
-            type: src[elm].missionType,
+            tier: src[elm].tierNum,
+            type: src[elm].missionKey,
             endTime:
               this.nDigitNbr(dateExpiry.getHours(), 2) +
               this.$t("unitsShort.hour") +
               this.nDigitNbr(dateExpiry.getUTCMinutes(), 2),
             targetDate: dateExpiry,
-            node: src[elm].node,
-            enemy: src[elm].enemy,
+            node: src[elm].nodeKey,
+            enemy: src[elm].enemyKey,
           };
+          if ( src[elm].isStorm == true) { dstV[dstIdx] = this.fissuresTmp; }
+          else { dstN[dstIdx] = this.fissuresTmp; }
         }
         dstIdx++;
       }

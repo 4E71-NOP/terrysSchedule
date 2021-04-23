@@ -80,7 +80,8 @@
 		},
 		"waiting": "Pendant qu'on attend...",
 		"fissuresTbl": {
-			"caption": "Mission reliques",
+			"captionNormal": "Mission reliques standart",
+			"captionVoid": "Mission reliques di Néant",
 			"c1": "Intérêt",
 			"c2": "Mission",
 			"c3": "Relique",
