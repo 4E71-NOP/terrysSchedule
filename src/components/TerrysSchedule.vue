@@ -797,7 +797,7 @@ export default {
               Math.round(
                 this.appealTable.missionType[src[elm].missionKey] *
                   this.appealTable.enemy[src[elm].enemyKey] *
-                  this.appealTable.tier[src[elm].tier] *
+                  this.appealTable.tier[src[elm].tierNum] *
                   100
               ) / 100,
             tier: src[elm].tier,
