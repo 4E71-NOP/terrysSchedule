@@ -811,7 +811,7 @@ export default {
               this.$t("unitsShort.hour") +
               this.nDigitNbr(dateExpiry.getUTCMinutes(), 2),
             targetDate: dateExpiry,
-            node: src[elm].nodeKey,
+            node: src[elm].node,
             enemy: src[elm].enemyKey,
           };
           if ( src[elm].isStorm == true) { dstV[dstIdx] = this.fissuresTmp; }
