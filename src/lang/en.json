@@ -80,6 +80,8 @@
 		},
 		"waiting": "While we wait...",
 		"fissuresTbl": {
+			"updateApiTxtLpw": "Loading please wait...",
+			"updateApiTxtErr": "Something went wrong. Try again.",
 			"captionNormal": "Regular relic missions",
 			"captionVoid": "Void relic missions",
 			"c1": "Appeal",

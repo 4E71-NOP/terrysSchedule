@@ -496,7 +496,6 @@ export default {
       tabs: 8,
 
       // Envent schedules
-      updateApiTxt : " ",
       SelectedPlatform: "pc",
       updatedFetch: false,
       localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -623,7 +622,7 @@ export default {
     apiDataUpdate: function () {
       return this.WfData[this.SelectedPlatform].data.timestamp
         ? new Date(this.WfData[this.SelectedPlatform].data.timestamp)
-        : this.updateApiTxt;
+        : this.$t("Ts.fissuresTbl.updateApiTxtLpw");
     },  
   },
 
@@ -842,7 +841,7 @@ export default {
     },
 
     async setPlatformAndRefresh(val) {
-      this.updateApiTxt = "Loading, please wait..."
+      this.WfData[this.SelectedPlatform].data.timestamp = this.$t("Ts.fissuresTbl.updateApiTxtLpw"),
       this.SelectedPlatform = val;
       for (let elm in this.tdListActive) {
         this.tdListActive[elm] = false;
@@ -873,6 +872,7 @@ export default {
             this.WfData[val].data = res;
           })
           .catch((err) => {
+            this.WfData[this.SelectedPlatform].data.timestamp = this.$t("Ts.fissuresTbl.updateApiTxtErr");
             console.log(err);
           });
 

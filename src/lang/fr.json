@@ -80,6 +80,8 @@
 		},
 		"waiting": "Pendant qu'on attend...",
 		"fissuresTbl": {
+			"updateApiTxtLpw": "Chargement en cours, patientez...",
+			"updateApiTxtErr": "Quelque chose a planté. Essayez à nouveau.",
 			"captionNormal": "Mission reliques standart",
 			"captionVoid": "Mission reliques di Néant",
 			"c1": "Intérêt",
