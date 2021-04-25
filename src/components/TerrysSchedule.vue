@@ -322,7 +322,7 @@
               </tr>
             </tbody>
           </table>
-          <br>
+          <br />
 
           <table class="tblFissures">
             <caption>
@@ -363,10 +363,6 @@
               </tr>
             </tbody>
           </table>
-
-
-
-
 
           <br />
         </v-tab-item>
@@ -500,6 +496,7 @@ export default {
       tabs: 8,
 
       // Envent schedules
+      updateApiTxt : " ",
       SelectedPlatform: "pc",
       updatedFetch: false,
       localTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -626,8 +623,8 @@ export default {
     apiDataUpdate: function () {
       return this.WfData[this.SelectedPlatform].data.timestamp
         ? new Date(this.WfData[this.SelectedPlatform].data.timestamp)
-        : "...";
-    },
+        : this.updateApiTxt;
+    },  
   },
 
   methods: {
@@ -845,6 +842,7 @@ export default {
     },
 
     async setPlatformAndRefresh(val) {
+      this.updateApiTxt = "Loading, please wait..."
       this.SelectedPlatform = val;
       for (let elm in this.tdListActive) {
         this.tdListActive[elm] = false;
