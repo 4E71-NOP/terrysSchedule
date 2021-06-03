@@ -62,9 +62,10 @@
       </p>
 
       <!-- -->
+        <!-- background-color="blue accent-4" -->
       <v-tabs
         v-model="tab"
-        background-color="blue accent-4"
+        background-color="#0080FF"
         class="elevation-2"
         dark
         :centered="centered"
@@ -86,7 +87,7 @@
         --------------------------------------------------------------------------------
         Eidolon 
         -->
-        <v-tab-item value="tab-1">
+        <v-tab-item value="tab-1" class="tabItem">
           <table class="tblEvents">
             <caption>
               {{
@@ -134,7 +135,7 @@
         --------------------------------------------------------------------------------
         Orbis valley 
         -->
-        <v-tab-item value="tab-2">
+        <v-tab-item value="tab-2" class="tabItem">
           <table class="tblEvents">
             <caption>
               {{
@@ -184,7 +185,7 @@
         --------------------------------------------------------------------------------
         Cambion drift
         -->
-        <v-tab-item value="tab-3">
+        <v-tab-item value="tab-3" class="tabItem">
           <table class="tblEvents">
             <caption>
               {{
@@ -236,8 +237,8 @@
         --------------------------------------------------------------------------------
         Sortie 
         -->
-        <v-tab-item value="tab-4">
-          <table class="tblSortie">
+        <v-tab-item value="tab-4" class="tabItem">
+          <table class="tblEvents tblSortie">
             <caption>
               {{
                 $t("Ts.sortieTbl.caption")
@@ -279,11 +280,11 @@
         --------------------------------------------------------------------------------
         Fissures 
         -->
-        <v-tab-item value="tab-5">
+        <v-tab-item value="tab-5" class="tabItem">
           {{ $t("Ts.waiting") }}
           <br />
 
-          <table class="tblFissures">
+          <table class="tblEvents">
             <caption>
               {{
                 $t("Ts.fissuresTbl.captionNormal")
@@ -324,7 +325,7 @@
           </table>
           <br />
 
-          <table class="tblFissures">
+          <table class="tblEvents">
             <caption>
               {{
                 $t("Ts.fissuresTbl.captionVoid")
@@ -369,7 +370,7 @@
         <!-- --------------------------------------------------------------------------------
         Bounties Ostrons
         -->
-        <v-tab-item value="tab-6">
+        <v-tab-item value="tab-6" class="tabItem">
           <table class="tblEvents">
             <caption>
               {{
@@ -399,7 +400,7 @@
         <!-- --------------------------------------------------------------------------------
         Bounties Solaris
         -->
-        <v-tab-item value="tab-7">
+        <v-tab-item value="tab-7" class="tabItem">
           <table class="tblEvents">
             <caption>
               {{
@@ -429,7 +430,7 @@
         <!-- --------------------------------------------------------------------------------
         Bounties Entrati
         -->
-        <v-tab-item value="tab-8">
+        <v-tab-item value="tab-8" class="tabItem">
           <table class="tblEvents">
             <caption>
               {{

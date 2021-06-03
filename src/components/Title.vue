@@ -1,6 +1,10 @@
 <template>
   <div id="title" class="title">
-    <h1>{{ $t('title') }}</h1>
+    <div class="titleTerryBubble"></div>
+    <span style="font-size:72px;font-family: 'Arial'; font-weight:bold;">
+    {{ $t('title') }}
+    </span>
+    <div class="titleWarFrameLogo"></div>
   </div>
 </template>
 
