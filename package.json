@@ -14,6 +14,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "@vue/cli": "^5.0.8",
     "core-js": "^3.13.1",
     "express": "^4.17.1",
     "lodash": "^4.17.21",

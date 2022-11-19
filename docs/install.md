@@ -86,3 +86,35 @@ ___
 
 https://stackoverflow.com/questions/59657252/trying-to-host-a-vuejs-app-on-heroku-getting-npm-err-missing-script-start-i
 
+---
+
+# Linux
+
+## Lancement local
+
+S'assurer de l'installation globale de vue cli
+```sh
+$> npm install @vue/cli -g
+```
+
+Lancement de vue UI
+```sh
+$> view ui
+```
+
+
+
+Lancement de l'application seule
+```sh
+$> npm run serve
+```
+
+Si on a une erreur ```ERR_OSSL_EVP_UNSUPPORTED``` on doit exporter une variable comme suit:
+```sh
+$> export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+
+
+
+
