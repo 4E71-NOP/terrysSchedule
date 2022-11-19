@@ -4,21 +4,20 @@
 	--MainCardMrgRgt: 1%;	
 	--MainCardMrgTop: 1%;	
 	--MainCardMrgBot: 5%;	
-	--MainCardBgColor: #204060;
-	--RouterBgColor: #406080;
+	--MainCardBgColor: #204060A0;
+	--RouterBgColor: #406080C0;
 
-	--TblBgColor: #FFFFFF10;
-
+	--TblBgColor: #00000040;
+	--TblCaptionBgColor: #4080FF40;
 	--TblHeadColor:#000000;
 	--TblHeadBgColor: #FFFF8040;
 
-	--TblTrHoverColor:#000000;
+	--TblTrHoverColor:#00000080;
 	--TblTrHoverBgColor: #FFFFFF80;
 	--TblTrHoverBgColorShft: #00000010;
 
 	--TblTdMonthShft: #0080FF40;
 	--TblTdDayShft: #80C0FF80;
-
 }
 
 #app {
@@ -33,7 +32,9 @@
 	align-items: center;
 	align-self: center;
 	align-content: center;
-
+	background-image: url("../media/img/Prime Access Key Art/Mirage&Banshee_DualPack.png");
+	background-position: center;
+	background-attachment: fixed;
 }
 
 
@@ -134,8 +135,24 @@
 	background-color: #ffffff40;
 }
 
-/* Page : Home/TerrySchedule  */
+.tabsMain {
+	background-color: #00000040;
+}
 
+.theme--light.v-tabs-items{
+	background-color: #00000020 !important;
+}
+
+.v-tab {
+	margin: 4px 4px 14px 4px;
+	background-color: #0080FF80;
+	border: 1px solid #ffffff !important;
+	border-radius: 5px 5px 5px 5px !important;
+	box-shadow: 0px 10px 5px #00000080;
+
+}
+
+/* Page : Home/TerrySchedule  */
 .RouterViewBlock {
 	width: var(--MainCardWidth);
 	display: block;
@@ -147,18 +164,20 @@
 	text-align: left;
 	border-radius: 0px 0px 10px 10px;
 	box-shadow: 0px 10px 5px #00000080;
+
 }
 
-.RouterViewBlock a, .RouterViewBlock a:visited, .RouterViewBlock a:active{
+.RouterViewBlock a:link	, .RouterViewBlock a:visited, .RouterViewBlock a:active{
 	color: #FFFFFF;
 	font-weight: bold;
+	text-decoration: none;
 }
 .RouterViewBlock a:hover {
 	text-decoration: underline;
 }
 
 .tabItem{
-	background-color: #6080A0;
+	background-color: #6080A020;
 	color: #FFFFFF;
 }
 
@@ -179,8 +198,10 @@
 	padding: 10px;
 	width: 20%;
 	border-radius: 25px;
+	border: 3px solid #FFFFFF;
 	text-align: center;
 	vertical-align: top;
+	box-shadow: #00B0FF 0px 10px 10px;
 }
 
 .tblSelectionPlatformTdActive {
@@ -211,7 +232,7 @@
 	font-size: large;
 	font-weight: bold;
 	text-align: left;
-	background-color: #00000010;
+	background-color: var(--TblCaptionBgColor);
 	padding: 10px;
 }
 
@@ -287,7 +308,7 @@
 	position: fixed;
 	bottom: 0;
 	padding: 10px;
-	background-color: #004080;
+	background-color: #00408080;
 	color: white;
 	border-radius: 10px;
 	font-weight: bold;

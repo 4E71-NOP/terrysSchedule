@@ -65,8 +65,8 @@
         <!-- background-color="blue accent-4" -->
       <v-tabs
         v-model="tab"
-        background-color="#0080FF"
-        class="elevation-2"
+        background-color="#0080FF40"
+        class="tabsMain"
         dark
         :centered="centered"
         :grow="grow"
