@@ -538,6 +538,9 @@ export default {
       right: false,
       tabs: 8,
 
+      appDiv:null,
+      currentAppBgClass: 'bg1',
+
       // Envent schedules
       SelectedPlatform: "pc",
       updatedFetch: false,
@@ -820,6 +823,7 @@ export default {
       let src = this.WfData[this.SelectedPlatform].data.fissures;
       this.fissuresNormal = {};
       this.fissuresVoid = {};
+      this.fissuresHard = {};
       let dstN = this.fissuresNormal;
       let dstV = this.fissuresVoid;
       let dstH = this.fissuresHard;
@@ -903,9 +907,9 @@ export default {
       this.tdListActive[val] = true;
       let dateVal = Date.now();
       if (dateVal - this.WfData[val].lastUpdate > 5 * 1000) {
-        // update the counters. We don't want to spam DE
+        // update the counters. We don't want to spam requests
         // console.log("Gap="+(dateVal - this.WfData[val].lastUpdate)/1000+"s -> Update!");
-        // Fetching the data from DE
+        // Fetching the data from source
         // https://api.warframestat.us/pc (where platform : pc,ps4,xb1,switch)
         console.log("Trying : " + "https://api.warframestat.us/" + val);
 
@@ -929,7 +933,7 @@ export default {
             console.log(err);
           });
 
-        // We supposed to have an object now
+        // We're supposed to have an object now
         // We still have to find some specific entries as they are 'thrown in the bucket like that'
         // We link those jobs section for conveninence
         let sm = this.WfData[val].data.syndicateMissions;
@@ -945,6 +949,12 @@ export default {
             }
           }
         }
+
+        // Changing the background
+        this.appDiv = document.getElementById('app');
+        this.appDiv.classList.remove(this.currentAppBgClass);
+        this.currentAppBgClass = 'bg' + Math.floor (Math.random() * 25);
+        this.appDiv.classList.add(this.currentAppBgClass);
 
         // Now we're talking
         await this.computeEvents(this.PlanetEventDefinitions.cetus);

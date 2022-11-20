@@ -113,6 +113,7 @@
 			},
 			"enemy":{
 				"Corpus":"Corpus",
+				"Crossfire":"Crossfire",
 				"Grineer":"Grineer",
 				"Orokin":"Orokin",
 				"Infested":"Infested",

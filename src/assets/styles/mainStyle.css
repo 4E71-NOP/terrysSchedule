@@ -32,10 +32,38 @@
 	align-items: center;
 	align-self: center;
 	align-content: center;
-	background-image: url("../media/img/Prime Access Key Art/Mirage&Banshee_DualPack.png");
 	background-position: center;
 	background-attachment: fixed;
+	background-image: url("../media/img/Prime Access Key Art/Mirage&Banshee_DualPack.png");
 }
+
+.bg0 { background-image: url("../media/img/Prime Access Key Art/Ash&Vauban_DualPack.png") !important; }
+.bg1 { background-image: url("../media/img/Prime Access Key Art/AtlasPrime.png") !important; }
+.bg2 { background-image: url("../media/img/Prime Access Key Art/ChromaPrime.jpg") !important; }
+.bg3 { background-image: url("../media/img/Prime Access Key Art/Chroma&Zephyr_DualPack.png") !important; }
+.bg4 { background-image: url("../media/img/Prime Access Key Art/GaraPrime_Accessories.jpg") !important; }
+.bg5 { background-image: url("../media/img/Prime Access Key Art/HydroidPrime.png") !important; }
+.bg6 { background-image: url("../media/img/Prime Access Key Art/IvaraPrime.png") !important; }
+.bg7 { background-image: url("../media/img/Prime Access Key Art/LimboPrime.png") !important; }
+.bg8 { background-image: url("../media/img/Prime Access Key Art/Mag&Nova_DualPack.jpg") !important; }
+.bg9 { background-image: url("../media/img/Prime Access Key Art/MesaPrimeAccess.png") !important; }
+.bg10 { background-image: url("../media/img/Prime Access Key Art/Mirage&Banshee_DualPack.png") !important; }
+.bg11 { background-image: url("../media/img/Prime Access Key Art/NekrosPrime.jpg") !important; }
+.bg12 { background-image: url("../media/img/Prime Access Key Art/NezhaPrime.jpg") !important; }
+.bg13 { background-image: url("../media/img/Prime Access Key Art/NyxPrimePrime.png") !important; }
+.bg14 { background-image: url("../media/img/Prime Access Key Art/Oberon&Nekros_DualPack.png") !important; }
+.bg15 { background-image: url("../media/img/Prime Access Key Art/Oberon&Nekros_NekrosIndividualPack.png") !important; }
+.bg16 { background-image: url("../media/img/Prime Access Key Art/Oberon&Nekros_OberonIndividualPack.png") !important; }
+.bg17 { background-image: url("../media/img/Prime Access Key Art/OctaviaPrime.jpg") !important; }
+.bg18 { background-image: url("../media/img/Prime Access Key Art/PrimeVault_Loki_Keyart_1080p_V04.jpg") !important; }
+.bg19 { background-image: url("../media/img/Prime Access Key Art/PrimeVault_LokiVoltDualPack_Keyart_1080p_V05.jpg") !important; }
+.bg20 { background-image: url("../media/img/Prime Access Key Art/PrimeVault_VoltAccessories_Keyart_1080p_V01.jpg") !important; }
+.bg21 { background-image: url("../media/img/Prime Access Key Art/SarynPrime.jpg") !important; }
+.bg22 { background-image: url("../media/img/Prime Access Key Art/SummerPrimeVault.jpg") !important; }
+.bg23 { background-image: url("../media/img/Prime Access Key Art/TitaniaPrime.png") !important; }
+.bg24 { background-image: url("../media/img/Prime Access Key Art/Trinity&Nova_DualPack.jpg") !important; }
+.bg25 { background-image: url("../media/img/Prime Access Key Art/WukongPrimeAccess.jpg") !important; }
+
 
 
 /* Component Title */
