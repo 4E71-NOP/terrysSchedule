@@ -99,7 +99,7 @@ $> npm install @vue/cli -g
 
 Lancement de vue UI
 ```sh
-$> view ui
+$> vue ui
 ```
 
 
